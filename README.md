@@ -12,7 +12,7 @@ simple github viewer
 ## TODO:
 * fix caching, now it is too aggressive and doesn't revalidate resources
 * two lines for description in master view
-* persist favourites
+* persist favourites in local storage
 * either remove the scope segments from favourites tab or implement scope filtering in there
 * remove extra divider llines in detail view
 * fix master view selection
@@ -27,12 +27,9 @@ simple github viewer
 * draw placeholders on borken avatar links
 * show network activity indicator
 * do a proper search via the query string (now local filtering is used) - (but check how slow/fast git api will do that)
-* when going from days to months and to years days results shall also be in month's and month results - in year's. at the moment it looks odd ( in other words fix month/year sorting -- shall show most recent days first)
-* show number of stars in master view
 * get rid of storyboard
 * make app icon
 * make launch screen
-* make mac catalyst version
 * move diffable data source applying to a background queue
 * get rid of UIKit/collection view and reimplement in SwiftUI
 * simplify project folder structure

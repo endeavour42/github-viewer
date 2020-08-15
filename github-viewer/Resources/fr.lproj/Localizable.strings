@@ -13,7 +13,7 @@
 "forksFormat" = "%d fourchettes";
 "starsFormat" = "%d étoiles";
 "dateFormat" = "Créé il y a %d jours le %@";
-"daysAgoFormat" = "Il y a %d jours";
+"daysAgoFormat" = "Il y a %d jours, %d étoiles";
 "day" = "Journée";
 "month" = "Mois";
 "year" = "An";

@@ -13,7 +13,7 @@
 "forksFormat" = "%d Forks";
 "starsFormat" = "%d Stars";
 "dateFormat" = "Created %d days ago at %@";
-"daysAgoFormat" = "%d days ago";
+"daysAgoFormat" = "%d days ago, %d stars";
 "day" = "Day";
 "month" = "Month";
 "year" = "Year";

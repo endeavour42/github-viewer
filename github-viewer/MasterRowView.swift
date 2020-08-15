@@ -29,7 +29,7 @@ struct MasterRowView: View {
                         .font(.subheadline)
                         .lineLimit(2)
                         .foregroundColor(.secondary)
-                    Text(String(format: localized(.daysAgoFormat), item.daysAgo))
+                    Text(String(format: localized(.daysAgoFormat), item.daysAgo, item.stargazers_count))
                         .font(.subheadline)
                         .lineLimit(2)
                         .foregroundColor(.secondary)

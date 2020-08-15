@@ -33,3 +33,16 @@ func onMainThread(execute: @escaping () -> Void) {
         DispatchQueue.main.async(execute: execute)
     }
 }
+
+extension URLSession {
+    func loadImage(from url: URL, execute: @escaping (_ image: UIImage?) -> Void) {
+        dataTask(with: url) { data, response, error in
+            execute(data != nil && error == nil ? UIImage(data: data!) : nil)
+        }.resume()
+    }
+}
+
+extension UIImage {
+    static let empty = UIImage()
+}
+

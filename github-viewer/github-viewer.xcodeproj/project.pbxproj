@@ -23,6 +23,7 @@
 		27D2054224E77982009EDB32 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D2054124E77982009EDB32 /* Strings.swift */; };
 		27D2054424E779C8009EDB32 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27D2054324E779C8009EDB32 /* Localizable.strings */; };
 		27D2054624E7894D009EDB32 /* RepoLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D2054524E7894D009EDB32 /* RepoLoader.swift */; };
+		27D2054824E7995C009EDB32 /* WebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D2054724E7995C009EDB32 /* WebImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		27D2054124E77982009EDB32 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		27D2054324E779C8009EDB32 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		27D2054524E7894D009EDB32 /* RepoLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoLoader.swift; sourceTree = "<group>"; };
+		27D2054724E7995C009EDB32 /* WebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				27D2053B24E76B13009EDB32 /* MasterRowView.swift */,
 				27D2053F24E77356009EDB32 /* DetailView.swift */,
 				27D2053924E76783009EDB32 /* Extensions.swift */,
+				27D2054724E7995C009EDB32 /* WebImage.swift */,
 				27800AA324E75B50007607B0 /* Main.storyboard */,
 				27800AA624E75B51007607B0 /* Assets.xcassets */,
 				27800AA824E75B51007607B0 /* LaunchScreen.storyboard */,
@@ -175,6 +178,7 @@
 				27800AA024E75B50007607B0 /* MasterController.swift in Sources */,
 				27D2053424E75E1F009EDB32 /* RepoItem.swift in Sources */,
 				27D2054024E77356009EDB32 /* DetailView.swift in Sources */,
+				27D2054824E7995C009EDB32 /* WebImage.swift in Sources */,
 				27D2053624E75F66009EDB32 /* RepoModel.swift in Sources */,
 				27D2053824E76612009EDB32 /* MasterRowCell.swift in Sources */,
 				27D2053E24E76DAD009EDB32 /* Icons.swift in Sources */,

@@ -15,8 +15,7 @@ struct MasterRowView: View {
     var body: some View {
         VStack {
             HStack(spacing: 10) {
-                Image(.language)
-                    .resizable()
+                WebImage(item.avatarUrl!)
                     .frame(width: 50, height: 50)
                 VStack(alignment: .leading, spacing: 4) {
                     Text(item.name)

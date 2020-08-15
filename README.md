@@ -1,6 +1,9 @@
 # github-viewer
 simple github viewer
 
+## Author:
+Mike Kluev
+
 ## Uses/Has:
 * UIKit
 * UICollectionView
@@ -8,13 +11,14 @@ simple github viewer
 * SwiftUI piecewise
 * URL on disk caching for search results and avatars
 * preliminary localization support
+* network activity indicator
 
 ## TODO:
 * fix caching, now it is too aggressive and doesn't revalidate resources
 * fix month/year calculation logic
 * two lines for description in master view
 * either remove the scope segments from favourites tab or implement scope filtering in there
-* remove extra divider llines in detail view
+* remove extra divider lines in detail view
 * fix master view selection
 * show some text when there is no content
 * lay the list under the tab bar so it shows through
@@ -29,4 +33,3 @@ simple github viewer
 * make app icon
 * move diffable data source applying to a background queue
 * get rid of UIKit/collection view and reimplement in SwiftUI
-* fix readme formatting

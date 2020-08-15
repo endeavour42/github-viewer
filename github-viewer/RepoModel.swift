@@ -112,17 +112,19 @@ extension RepoModel {
         changed()
     }
     
+    var storageKey: String { "favourites.2" }
+    
     private var storedFavouriteItems: [RepoItem] {
         get {
-            guard let items = UserDefaults.standard.array(forKey: "favourites") else { return [] }
+            guard let items = UserDefaults.standard.array(forKey: storageKey) else { return [] }
             return items.compactMap {
-                guard let it = $0 as? [String: Any] else { return nil }
-                return RepoItem(it)
+                guard let data = $0 as? Data else { return nil }
+                return RepoItem(fromJsonData: data)
             }
         }
         set {
-            let items = newValue.map { $0.dictionary }
-            UserDefaults.standard.set(items, forKey: "favourites")
+            let items = newValue.map { $0.toJsonData() }
+            UserDefaults.standard.set(items, forKey: storageKey)
         }
     }
 

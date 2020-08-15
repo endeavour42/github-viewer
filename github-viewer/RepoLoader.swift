@@ -58,7 +58,7 @@ extension URLSession {
             let repoResult: RepoResult
             
             do {
-                repoResult = try JSONDecoder().decode(RepoResult.self, from: data)
+                repoResult = try RepoResult(fromJsonData: data)
             } catch {
                 execute([], nil, error)
                 return

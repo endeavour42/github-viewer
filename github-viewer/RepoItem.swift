@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct RepoItem: Identifiable, Hashable, Decodable {
+struct RepoItem: Identifiable, Hashable, Codable {
     
-    struct Owner: Identifiable, Hashable, Decodable {
+    struct Owner: Identifiable, Hashable, Codable {
         let id: Int
         let login: String
         let avatar_url: String?
@@ -55,52 +55,26 @@ struct RepoItem: Identifiable, Hashable, Decodable {
 }
 
 extension RepoItem {
-    init(_ v: [String: Any]) {
-        self.init(
-            id: v["id"] as! Int,
-            name: v["name"] as! String,
-            description: v["description"] as? String,
-            stargazers_count: v["stargazers_count"] as! Int,
-            language: v["language"] as? String,
-            forks: v["forks"] as! Int,
-            created_at: v["created_at"] as! String,
-            html_url: v["html_url"] as! String,
-            owner: Owner(v["owner"] as! [String: Any])
-        )
-    }
-    var dictionary: [String: Any] {
-        var v: [String: Any] = [:]
-        v["id"] = id
-        v["name"] = name
-        v["description"] = description
-        v["stargazers_count"] = stargazers_count
-        v["language"] = language
-        v["forks"] = forks
-        v["created_at"] = created_at
-        v["html_url"] = html_url
-        v["owner"] = owner.dictionary
-        return v
-    }
-}
-
-extension RepoItem.Owner {
-    init(_ v: [String: Any]) {
-        self.init(
-            id: v["id"] as! Int,
-            login: v["login"] as! String,
-            avatar_url: v["avatar_url"] as? String
-        )
+    init?(fromJsonData jsonData: Data) {
+        guard let v = try? JSONDecoder().decode(RepoItem.self, from: jsonData) else {
+            return nil
+        }
+        self = v
     }
     
-    var dictionary: [String: Any] {
-        var v: [String: Any] = [:]
-        v["id"] = id
-        v["login"] = login
-        v["avatar_url"] = avatar_url
-        return v
+    func toJsonData() -> Data? {
+        try? JSONEncoder().encode(self)
     }
 }
 
 struct RepoResult: Decodable {
     let items: [RepoItem]
+    
+    init(fromJsonData jsonData: Data) throws {
+        do {
+            self = try JSONDecoder().decode(RepoResult.self, from: jsonData)
+        } catch {
+            throw error
+        }
+    }
 }

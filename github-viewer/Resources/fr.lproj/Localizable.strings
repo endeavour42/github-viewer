@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  github-viewer
+
+  Created by Mike on 15/08/2020.
+  Copyright © 2020 Mike Kluev. All rights reserved.
+*/
+
+"repositories" = "Référentiels";
+"favourites" = "Favoris";
+"noDescription" = "Pas de description";
+"noLanguage" = "Pas de langue";
+"forksFormat" = "%d fourchettes";
+"starsFormat" = "%d étoiles";
+"dateFormat" = "Créé il y a %d jours le %@";
+"day" = "Journée";
+"month" = "Mois";
+"year" = "An";
+"openInGitHub" = "Ouvrir dans GitHub";

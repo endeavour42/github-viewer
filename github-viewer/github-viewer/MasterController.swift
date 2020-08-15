@@ -10,14 +10,24 @@ import UIKit
 
 var temp: Int = 0 // TODO: remove later
 
-class MasterController: UITableViewController {
-
-    var detailController: DetailController?
+class MasterController: UIViewController {
     
+    enum Segues: String {
+        case showDetail
+    }
+
+    @IBOutlet weak var tableView: UITableView!
+    
+    private var detailController: DetailController?
+
     var model: RepoModel { RepoModel.singleton }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.dataSource = self
+        tableView.delegate = self
 
         let controllers = splitViewController!.viewControllers
         detailController = (controllers.last as! UINavigationController).topViewController as? DetailController
@@ -28,7 +38,7 @@ class MasterController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+        //clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
     }
 }
@@ -49,15 +59,15 @@ extension MasterController {
     }
 }
 
-// MARK: TableDataSource
+// MARK: TableView
 
-extension MasterController {
+extension MasterController: UITableViewDataSource {
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return model.items.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
         let item = model.items[indexPath.row]
@@ -66,3 +76,8 @@ extension MasterController {
     }
 }
 
+extension MasterController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: Segues.showDetail.rawValue, sender: nil)
+    }
+}

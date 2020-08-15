@@ -12,13 +12,14 @@ var temp: Int = 0 // TODO: remove later
 
 class MasterController: UIViewController {
     
-    typealias DataSource = UITableViewDiffableDataSource<String, RepoItem>
+    typealias DataSource = UICollectionViewDiffableDataSource<String, RepoItem>
     typealias Snapshot = NSDiffableDataSourceSnapshot<String, RepoItem>
     
     private let showDetail = "showDetail"
 
-    @IBOutlet weak var tableView: UITableView!
-    
+    private var collectionLayout: UICollectionViewFlowLayout!
+    private var collectionView: UICollectionView!
+
     private var detailController: DetailController?
     private var dataSource: DataSource!
 
@@ -27,11 +28,16 @@ class MasterController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        tableView.delegate = self
+        collectionLayout = UICollectionViewFlowLayout()
+        collectionLayout.itemSize = CGSize(width: 100, height: 100)
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: collectionLayout)
+        collectionView.backgroundColor = .red
+        collectionView.register(MasterRowCell.self, forCellWithReuseIdentifier: MasterRowCell.identifier)
+        collectionView.delegate = self
+        collectionView.autoresizingMask = .flexibleSize
+        view.addSubview(collectionView)
         
-        dataSource = DataSource(tableView: tableView, cellProvider: cellProvider)
-        dataSource.defaultRowAnimation = .fade
+        dataSource = DataSource(collectionView: collectionView, cellProvider: cellProvider)
         
         let controllers = splitViewController!.viewControllers
         detailController = (controllers.last as! UINavigationController).topViewController as? DetailController
@@ -60,7 +66,7 @@ class MasterController: UIViewController {
 extension MasterController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showDetail {
-            if let indexPath = tableView.indexPathForSelectedRow {
+            if let indexPath = collectionView.indexPathsForSelectedItems?.first {
                 let item = model.items[indexPath.row]
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailController
                 controller.item = item
@@ -74,15 +80,21 @@ extension MasterController {
 // MARK: TableView
 
 extension MasterController {
-    private func cellProvider(_ tableView: UITableView, _ indexPath: IndexPath, _ item: RepoItem) -> UITableViewCell? {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel!.text = item.name
+    private func cellProvider(_ collectionView: UICollectionView, _ indexPath: IndexPath, _ item: RepoItem) -> UICollectionViewCell? {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MasterRowCell.identifier, for: indexPath) as! MasterRowCell
+        cell.textLabel.text = item.name
         return cell
     }
 }
 
-extension MasterController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+extension MasterController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         performSegue(withIdentifier: showDetail, sender: nil)
+    }
+}
+
+extension MasterController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: 100, height: 100)
     }
 }

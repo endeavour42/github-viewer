@@ -15,6 +15,8 @@
 		27800AAA24E75B51007607B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27800AA824E75B51007607B0 /* LaunchScreen.storyboard */; };
 		27D2053424E75E1F009EDB32 /* RepoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D2053324E75E1F009EDB32 /* RepoItem.swift */; };
 		27D2053624E75F66009EDB32 /* RepoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D2053524E75F66009EDB32 /* RepoModel.swift */; };
+		27D2053824E76612009EDB32 /* MasterRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D2053724E76612009EDB32 /* MasterRowCell.swift */; };
+		27D2053A24E76783009EDB32 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D2053924E76783009EDB32 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		27800AAB24E75B51007607B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27D2053324E75E1F009EDB32 /* RepoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoItem.swift; sourceTree = "<group>"; };
 		27D2053524E75F66009EDB32 /* RepoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoModel.swift; sourceTree = "<group>"; };
+		27D2053724E76612009EDB32 /* MasterRowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterRowCell.swift; sourceTree = "<group>"; };
+		27D2053924E76783009EDB32 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +68,9 @@
 				27800A9F24E75B50007607B0 /* MasterController.swift */,
 				27D2053324E75E1F009EDB32 /* RepoItem.swift */,
 				27D2053524E75F66009EDB32 /* RepoModel.swift */,
+				27D2053724E76612009EDB32 /* MasterRowCell.swift */,
 				27800AA124E75B50007607B0 /* DetailController.swift */,
+				27D2053924E76783009EDB32 /* Extensions.swift */,
 				27800AA324E75B50007607B0 /* Main.storyboard */,
 				27800AA624E75B51007607B0 /* Assets.xcassets */,
 				27800AA824E75B51007607B0 /* LaunchScreen.storyboard */,
@@ -148,7 +154,9 @@
 				27800AA024E75B50007607B0 /* MasterController.swift in Sources */,
 				27D2053424E75E1F009EDB32 /* RepoItem.swift in Sources */,
 				27D2053624E75F66009EDB32 /* RepoModel.swift in Sources */,
+				27D2053824E76612009EDB32 /* MasterRowCell.swift in Sources */,
 				27800A9E24E75B50007607B0 /* AppDelegate.swift in Sources */,
+				27D2053A24E76783009EDB32 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

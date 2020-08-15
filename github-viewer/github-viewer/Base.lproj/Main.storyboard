@@ -79,24 +79,11 @@
                     <view key="view" contentMode="scaleToFill" id="leB-7A-HmZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rSq-jg-1uF">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="rSq-jg-1uF" firstAttribute="leading" secondItem="leB-7A-HmZ" secondAttribute="leadingMargin" constant="-20" id="2Kb-SM-afJ"/>
-                            <constraint firstItem="rSq-jg-1uF" firstAttribute="top" secondItem="leB-7A-HmZ" secondAttribute="topMargin" constant="-88" id="aX9-9m-FFp"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="rSq-jg-1uF" secondAttribute="trailing" constant="-20" id="jlQ-ai-StV"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="rSq-jg-1uF" secondAttribute="bottom" constant="-34" id="v9W-XZ-CwX"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="cFC-Hl-1dR"/>
                     </view>
                     <navigationItem key="navigationItem" id="mEW-Tp-Vet"/>
                     <connections>
-                        <outlet property="tableView" destination="rSq-jg-1uF" id="fbR-Nx-fqq"/>
                         <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showDetail" id="Tv5-on-UFi"/>
                     </connections>
                 </viewController>

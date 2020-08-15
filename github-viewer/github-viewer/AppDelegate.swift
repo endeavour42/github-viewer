@@ -27,7 +27,7 @@ extension AppDelegate: UISplitViewControllerDelegate {
     func splitViewController(_ svc: UISplitViewController, collapseSecondary secondaryVC: UIViewController, onto: UIViewController) -> Bool {
         guard let secondaryAsNavController = secondaryVC as? UINavigationController else { return false }
         guard let detailVC = secondaryAsNavController.topViewController as? DetailController else { return false }
-        if detailVC.detailItem == nil {
+        if detailVC.item == nil {
             // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
             return true
         }

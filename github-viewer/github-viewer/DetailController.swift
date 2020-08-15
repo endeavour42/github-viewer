@@ -13,7 +13,7 @@ class DetailController: UIViewController {
     @IBOutlet weak var detailLabel: UILabel!
 
     func configureView() {
-        detailLabel?.text = detailItem?.description
+        detailLabel?.text = item?.name
     }
 
     override func viewDidLoad() {
@@ -21,7 +21,7 @@ class DetailController: UIViewController {
         configureView()
     }
 
-    var detailItem: NSDate? {
+    var item: RepoItem? {
         didSet {
             configureView()
         }

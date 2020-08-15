@@ -37,7 +37,17 @@ class RepoModel: ObservableObject {
     }
     
     var period: Period = .day {
-        didSet { changed() }
+        didSet {
+            guard period != oldValue else { return }
+            
+            if domain == .repositories {
+                nextUrl = nil
+                repoItems = []
+                loadMoreItems()
+            } else {
+                changed()
+            }
+        }
     }
 
     private init() {
@@ -48,7 +58,7 @@ class RepoModel: ObservableObject {
     
     func loadMoreItems(execute: (() -> Void)? = nil) {
         if domain == .repositories {
-            URLSession.shared.loadRepos(fromUrl: nextUrl, since: Date() - 100500) { items, nextUrl in
+            URLSession.shared.loadRepos(fromUrl: nextUrl, since: Date() - period.timeInterval) { items, nextUrl in
                 self.nextUrl = nextUrl
                 var newItems = items
                 newItems.removeAll { it in
@@ -79,5 +89,16 @@ extension RepoModel {
             favouriteItems.append(item)
         }
         changed()
+    }
+}
+
+// TODO: redo later
+extension RepoModel.Period {
+    var timeInterval: TimeInterval {
+        switch self {
+        case .day: return 24*60*60
+        case .month: return 30 * RepoModel.Period.day.timeInterval
+        case .year: return 365 * RepoModel.Period.day.timeInterval
+        }
     }
 }

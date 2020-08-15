@@ -46,7 +46,14 @@ extension URLSession {
         let url = fromUrl ?? makeNewUrl()
         
         dataTask(with: url) { data, response, error in
-            let repoResult = try! JSONDecoder().decode(RepoResult.self, from: data!)
+            guard let data = data, error == nil else {
+                execute([], nil)
+                return
+            }
+            guard let repoResult = try? JSONDecoder().decode(RepoResult.self, from: data) else {
+                execute([], nil)
+                return
+            }
             let nextUrl = parseNextUrl(from: response)
             execute(repoResult.items, nextUrl)
         }.resume()

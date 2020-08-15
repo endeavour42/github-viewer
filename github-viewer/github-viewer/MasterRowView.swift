@@ -27,6 +27,7 @@ struct MasterRowView: View {
                         .foregroundColor(.primary)
                     Text(item.description ?? localized(.noDescription))
                         .font(.subheadline)
+                        .lineLimit(2)
                         .foregroundColor(.secondary)
                 }
                 

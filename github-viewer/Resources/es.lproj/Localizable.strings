@@ -13,6 +13,7 @@
 "forksFormat" = "%d Tenedores";
 "starsFormat" = "%d Estrellas";
 "dateFormat" = "Creado hace %d días a las %@";
+"daysAgoFormat" = "Hace %d dias";
 "day" = "Día";
 "month" = "Mes";
 "year" = "Año";

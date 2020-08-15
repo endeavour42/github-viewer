@@ -57,10 +57,6 @@ struct RowView: View {
 struct DetailView: View {
     let item: RepoItem!
     
-    private var daysAgo: Int {
-        Int(Date().timeIntervalSince(item.createdDate) / RepoModel.Period.day.timeInterval)
-    }
-    
     var body: some View {
         List {
             if item != nil {
@@ -68,7 +64,7 @@ struct DetailView: View {
                 RowView(iconKey: .language, title: item.language ?? localized(.noLanguage))
                 RowView(iconKey: .forks, title: String(format: localized(.forksFormat), item.forks))
                 RowView(iconKey: .stars, title: String(format: localized(.starsFormat), item.stargazers_count))
-                RowView(iconKey: .date, title: String(format: localized(.dateFormat), daysAgo, item.createdDate.toString(dateStyle: .short, timeStyle: .none)))
+                RowView(iconKey: .date, title: String(format: localized(.dateFormat), item.daysAgo, item.createdDate.toString(dateStyle: .short, timeStyle: .none)))
                 FooterView(url: item.htmlUrl)
             }
         }

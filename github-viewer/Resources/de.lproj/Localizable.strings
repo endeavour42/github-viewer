@@ -13,6 +13,7 @@
 "forksFormat" = "%d Gabeln";
 "starsFormat" = "%d Sterne";
 "dateFormat" = "Erstellt vor %d Tagen am %@";
+"daysAgoFormat" = "Vor %d tagen";
 "day" = "Tag";
 "month" = "Monat";
 "year" = "Jahr";

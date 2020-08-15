@@ -40,6 +40,10 @@ struct RepoItem: Identifiable, Hashable, Decodable {
         RepoItem.dateFormatter.date(from: created_at)!
     }
     
+    var daysAgo: Int {
+        Int(Date().timeIntervalSince(createdDate) / RepoModel.Period.day.timeInterval)
+    }
+    
     var avatarUrl: URL? {
         guard let string = owner.avatar_url else { return nil }
         return URL(string: string)

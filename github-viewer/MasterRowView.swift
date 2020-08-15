@@ -29,6 +29,10 @@ struct MasterRowView: View {
                         .font(.subheadline)
                         .lineLimit(2)
                         .foregroundColor(.secondary)
+                    Text(String(format: localized(.daysAgoFormat), item.daysAgo))
+                        .font(.subheadline)
+                        .lineLimit(2)
+                        .foregroundColor(.secondary)
                 }
                 
                 Spacer()

@@ -16,6 +16,7 @@ enum StringKey: String {
     case forksFormat
     case starsFormat
     case dateFormat
+    case daysAgoFormat
     case openInGitHub
     case day
     case month

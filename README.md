@@ -27,9 +27,8 @@ simple github viewer
 * draw placeholders on borken avatar links
 * show network activity indicator
 * do a proper search via the query string (now local filtering is used) - (but check how slow/fast git api will do that)
-* when going from days to months and to years days results shall also be in month's and month results - in year's. at the moment it looks odd
+* when going from days to months and to years days results shall also be in month's and month results - in year's. at the moment it looks odd ( in other words fix month/year sorting -- shall show most recent days first)
 * show number of stars in master view
-* localize to french, spanish, german
 * get rid of storyboard
 * make app icon
 * make launch screen

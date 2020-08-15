@@ -48,7 +48,8 @@ class MasterController: UIViewController {
         
         setupSearch()
         setupTabBar()
-        
+        setupRefreshControl()
+
         NotificationCenter.default.addObserver(forName: model.changedNotification, object: nil, queue: nil) { _ in
             self.applyModelChanges()
         }
@@ -151,5 +152,24 @@ extension MasterController {
 extension MasterController: UITabBarDelegate {
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         model.domain = RepoModel.Domain(rawValue: item.tag)!
+    }
+}
+
+// MARK: setupRefreshControl
+
+extension MasterController {
+    
+    private func setupRefreshControl() {
+        let rc = UIRefreshControl()
+        rc.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
+        collectionView.refreshControl = rc
+    }
+    
+    @objc private func refreshAction(_ rc: UIRefreshControl) {
+        model.loadMoreItems() {
+            onMainThread {
+                rc.endRefreshing()
+            }
+        }
     }
 }

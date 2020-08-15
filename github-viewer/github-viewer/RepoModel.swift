@@ -41,26 +41,19 @@ class RepoModel: ObservableObject {
     }
 
     private init() {
-//        insertNewObject()
-//        insertNewObject()
-//        insertNewObject()
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//            self.insertNewObject()
-//        }
-        
-        URLSession.shared.loadRepos(since: Date() - 100500) { items in
-            self.repoItems.append(contentsOf: items)
-        }
+        loadMoreItems()
     }
     
-//    private func insertNewObject() {
-//        let repo = RepoItem(name: String(temp), description: "desc" + String(temp), language: "lang" + String(temp), forks: 1, stars: 2, date: Date())
-//
-//        repoItems.insert(repo, at: 0)
-//        temp += 1
-//        changed()
-//    }
+    func loadMoreItems(execute: (() -> Void)? = nil) {
+        if domain == .repositories {
+            URLSession.shared.loadRepos(since: Date() - 100500) { items in
+                self.repoItems.insert(contentsOf: items, at: 0)
+                execute?()
+            }
+        } else {
+            execute?()
+        }
+    }
     
     private func changed() {
         NotificationCenter.default.post(name: changedNotification, object: self, userInfo: nil)

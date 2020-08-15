@@ -25,3 +25,11 @@ extension DateFormatter {
         self.dateFormat = dateFormat
     }
 }
+
+func onMainThread(execute: @escaping () -> Void) {
+    if Thread.isMainThread {
+        execute()
+    } else {
+        DispatchQueue.main.async(execute: execute)
+    }
+}

@@ -26,7 +26,7 @@ extension URLSession {
                 URLQueryItem(name: "sort", value: "stars"),
                 URLQueryItem(name: "order", value: "desc"),
                 URLQueryItem(name: "accept", value: "application/vnd.github.v3+json"),
-                URLQueryItem(name: "per_page", value: String(10))
+                URLQueryItem(name: "per_page", value: String(3))
             ]
             return components.url!
         }

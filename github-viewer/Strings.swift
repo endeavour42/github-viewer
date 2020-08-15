@@ -22,6 +22,9 @@ enum StringKey: String {
     case year
 }
 
+private let testStrings = true
+
 func localized(_ key: StringKey) -> String {
-    NSLocalizedString(key.rawValue, comment: "")
+    let string = NSLocalizedString(key.rawValue, comment: "")
+    return testStrings ? string.uppercased() : string
 }

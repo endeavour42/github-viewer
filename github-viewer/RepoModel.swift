@@ -29,6 +29,14 @@ class RepoModel: ObservableObject {
     private var repoItems: [RepoItem] = [] {
         didSet { changed() }
     }
+    
+    var error: Error? {
+        didSet {
+            if (error != nil) != (oldValue != nil) {
+                changed()
+            }
+        }
+    }
 
     var items: [RepoItem] {
         domain == .repositories ? repoItems : favouriteItems
@@ -61,7 +69,15 @@ class RepoModel: ObservableObject {
     
     func loadMoreItems(execute: (() -> Void)? = nil) {
         if domain == .repositories {
-            URLSession.caching.loadRepos(from: nextUrl, since: Date() - period.timeInterval) { items, nextUrl in
+            URLSession.caching.loadRepos(from: nextUrl, since: Date() - period.timeInterval) { items, nextUrl, error in
+                
+                self.error = error
+                
+                if error != nil {
+                    execute?()
+                    return
+                }
+                
                 self.nextUrl = nextUrl
                 var newItems = items
                 newItems.removeAll { it in

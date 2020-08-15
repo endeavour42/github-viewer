@@ -12,6 +12,7 @@ class MasterController: UIViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var tabBar: UITabBar!
+    @IBOutlet private weak var errorLabel: UILabel!
 
     private typealias DataSource = UICollectionViewDiffableDataSource<String, RepoItem>
     private typealias Snapshot = NSDiffableDataSourceSnapshot<String, RepoItem>
@@ -49,6 +50,7 @@ class MasterController: UIViewController {
     }
     
     private func applyModelChanges() {
+        
         let items = model.items
             .filter { searchText?.isContained(in: [$0.title, $0.description]) ?? true }
         
@@ -57,6 +59,8 @@ class MasterController: UIViewController {
         snapshot.appendItems(items)
         
         onMainThread { // REDO later
+            self.errorLabel.alpha = self.model.error != nil ? 0.7 : 0
+            self.errorLabel.text = self.model.error?.localizedDescription
             self.dataSource.apply(snapshot)
         }
     }
@@ -170,7 +174,7 @@ extension MasterController {
     }
     
     @objc private func refreshAction(_ rc: UIRefreshControl) {
-        model.loadMoreItems() {
+        model.loadMoreItems {
             onMainThread {
                 rc.endRefreshing()
             }

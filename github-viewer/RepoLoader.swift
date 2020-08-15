@@ -11,7 +11,7 @@ import Foundation
 extension URLSession {
     private static let repoDateFormatter = DateFormatter(dateFormat: "yyyy-MM-dd")
     
-    func loadRepos(from fromUrl: URL?, since: Date, itemCountPerPage: Int = 10, execute: @escaping ([RepoItem], _ nextUrl: URL?) -> Void) {
+    func loadRepos(from fromUrl: URL?, since: Date, itemCountPerPage: Int = 10, execute: @escaping ([RepoItem], _ nextUrl: URL?, Error?) -> Void) {
         
         func makeNewUrl() -> URL? {
             let dateString = URLSession.repoDateFormatter.string(from: since)
@@ -44,21 +44,26 @@ extension URLSession {
         }
 
         guard let url = fromUrl ?? makeNewUrl() else {
-            execute([], nil)
+            execute([], nil, NSError(domain: "URL Error", code: -1, userInfo: nil))
             return
         }
         
-        dataTask(with: url) { data, response, error in
-            guard let data = data, error == nil else {
-                execute([], nil)
+        dataTask(with: url) { data, response, err in
+            guard let data = data, err == nil else {
+                execute([], nil, err)
                 return
             }
-            guard let repoResult = try? JSONDecoder().decode(RepoResult.self, from: data) else {
-                execute([], nil)
+            
+            let repoResult: RepoResult
+            
+            do {
+                repoResult = try JSONDecoder().decode(RepoResult.self, from: data)
+            } catch {
+                execute([], nil, error)
                 return
             }
             let nextUrl = parseNextUrl(from: response)
-            execute(repoResult.items, nextUrl)
+            execute(repoResult.items, nextUrl, nil)
         }.resume()
     }
 }

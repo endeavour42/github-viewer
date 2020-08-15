@@ -25,6 +25,9 @@ class MasterRowCell: UICollectionViewCell {
             if let item = item {
                 vc = UIHostingController(rootView: MasterRowView(item: item))
                 let v = vc.view!
+                #if targetEnvironment(macCatalyst)
+                v.backgroundColor = .clear
+                #endif
                 v.frame = contentView.bounds
                 v.autoresizingMask = .flexibleSize
                 v.translatesAutoresizingMaskIntoConstraints = true

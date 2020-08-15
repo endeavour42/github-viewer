@@ -34,6 +34,9 @@ class MasterController: UIViewController {
         super.viewDidLoad()
         
         title = localized(.repositories)
+        #if targetEnvironment(macCatalyst)
+        view.backgroundColor = .clear
+        #endif
         
         let controllers = splitViewController!.viewControllers
         detailController = (controllers.last as! UINavigationController).topViewController as? DetailController
@@ -77,6 +80,9 @@ extension MasterController {
         collectionView.register(MasterRowCell.self, forCellWithReuseIdentifier: MasterRowCell.identifier)
         collectionView.delegate = self
         dataSource = DataSource(collectionView: collectionView, cellProvider: cellProvider)
+        #if targetEnvironment(macCatalyst)
+        collectionView.backgroundColor = .clear
+        #endif
     }
     
     private func cellProvider(_ collectionView: UICollectionView, _ indexPath: IndexPath, _ item: RepoItem) -> UICollectionViewCell? {

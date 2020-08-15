@@ -25,6 +25,9 @@ class DetailController: UIViewController {
                 vc = UIHostingController(rootView: DetailView(item: item))
                 addChild(vc)
                 let v = vc.view!
+                #if targetEnvironment(macCatalyst)
+                v.backgroundColor = .clear
+                #endif
                 v.frame = view.bounds
                 v.autoresizingMask = .flexibleSize
                 view.addSubview(v)

@@ -18,6 +18,9 @@ extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let svc = window!.rootViewController as! UISplitViewController
         svc.preferredDisplayMode = .allVisible
+        #if targetEnvironment(macCatalyst)
+        svc.primaryBackgroundStyle = .sidebar
+        #endif
         let nav = svc.viewControllers.last as! UINavigationController
         nav.topViewController!.navigationItem.leftBarButtonItem = svc.displayModeButtonItem
         svc.delegate = self

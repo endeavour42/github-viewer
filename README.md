@@ -13,6 +13,7 @@ Anything else
 ## Uses/Has:
 * UIKit
 * UICollectionView
+* diffable data sources
 * pull to refresh and infinite scrolling
 * SwiftUI piecewise
 * URL on disk caching for search results and avatars

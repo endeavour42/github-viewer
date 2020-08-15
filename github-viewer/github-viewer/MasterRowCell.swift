@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class MasterRowCell: UICollectionViewCell {
     
@@ -16,7 +17,7 @@ class MasterRowCell: UICollectionViewCell {
     
     var item: RepoItem? {
         didSet {
-            textLabel.text = item?.name
+            textLabel.text = item?.title
         }
     }
     

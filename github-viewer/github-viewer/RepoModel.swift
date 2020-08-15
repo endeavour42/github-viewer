@@ -27,7 +27,7 @@ class RepoModel {
     var items: [RepoItem] = []
     
     private func insertNewObject() {
-        items.insert(RepoItem(name: String(temp)), at: 0)
+        items.insert(RepoItem(title: String(temp), subtitle: "subtitle"), at: 0)
         temp += 1
         NotificationCenter.default.post(name: changedNotification, object: self, userInfo: nil)
     }

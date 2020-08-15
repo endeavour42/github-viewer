@@ -9,5 +9,6 @@
 import Foundation
 
 struct RepoItem: Hashable {
-    var name: String
+    var title: String
+    var subtitle: String
 }

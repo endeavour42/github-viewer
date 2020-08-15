@@ -13,7 +13,7 @@ class DetailController: UIViewController {
     @IBOutlet weak var detailLabel: UILabel!
 
     func configureView() {
-        detailLabel?.text = item?.name
+        detailLabel?.text = item?.title
     }
 
     override func viewDidLoad() {

@@ -57,7 +57,7 @@ struct RowView: View {
 struct DetailView: View {
     let item: RepoItem!
     
-    var daysAgo: Int {
+    private var daysAgo: Int {
         Int(Date().timeIntervalSince(item.createdDate) / RepoModel.Period.day.timeInterval)
     }
     

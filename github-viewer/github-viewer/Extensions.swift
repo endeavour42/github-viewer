@@ -37,11 +37,13 @@ func onMainThread(execute: @escaping () -> Void) {
 private let testCache = false
 
 extension URLSessionConfiguration {
-    static let cachingConfiguration: URLSessionConfiguration = {
-        let config: URLSessionConfiguration = .default
-        config.requestCachePolicy = testCache ? .returnCacheDataDontLoad : .returnCacheDataElseLoad
-        return config
-    }()
+    class func makeWith(policy: URLRequest.CachePolicy) -> URLSessionConfiguration {
+        let v = URLSessionConfiguration.default
+        v.requestCachePolicy = policy
+        return v
+    }
+    static let caching: URLSessionConfiguration = .makeWith(policy: .returnCacheDataElseLoad)
+    static let revalidating: URLSessionConfiguration = .makeWith(policy: .reloadRevalidatingCacheData)
 }
 
 extension URLSession {
@@ -51,7 +53,8 @@ extension URLSession {
         }.resume()
     }
     
-    static let cachingSession = URLSession(configuration: .cachingConfiguration)
+    static let caching = URLSession(configuration: .caching)
+    static let revallidating = URLSession(configuration: .revalidating)
 }
 
 extension UIImage {

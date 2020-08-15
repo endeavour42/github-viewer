@@ -13,7 +13,7 @@ class WebImageLoader: ObservableObject {
     @Published private (set) var image: UIImage?
     
     func load(_ url: URL) {
-        URLSession.cachingSession.loadImage(from: url) { image in
+        URLSession.caching.loadImage(from: url) { image in
             onMainThread {
                 self.image = image
             }

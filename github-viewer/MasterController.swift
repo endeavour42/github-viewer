@@ -122,7 +122,8 @@ extension MasterController {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
-        
+        searchController.automaticallyShowsScopeBar = false
+
         let searchBar = searchController.searchBar
         searchBar.delegate = self
         searchBar.scopeButtonTitles = [localized(.day), localized(.month), localized(.year)]
@@ -130,6 +131,7 @@ extension MasterController {
         
         navigationItem.searchController = searchController
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
     }
 }
 

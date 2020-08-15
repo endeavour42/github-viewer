@@ -11,8 +11,8 @@ simple github viewer
 
 ## TODO:
 * fix caching, now it is too aggressive and doesn't revalidate resources
+* fix month/year calculation logic
 * two lines for description in master view
-* persist favourites in local storage
 * either remove the scope segments from favourites tab or implement scope filtering in there
 * remove extra divider llines in detail view
 * fix master view selection
@@ -29,5 +29,4 @@ simple github viewer
 * make app icon
 * move diffable data source applying to a background queue
 * get rid of UIKit/collection view and reimplement in SwiftUI
-* simplify project folder structure
 * fix readme formatting

@@ -23,7 +23,7 @@ enum StringKey: String {
     case year
 }
 
-private let testStrings = true
+private let testStrings = false
 
 func localized(_ key: StringKey) -> String {
     let string = NSLocalizedString(key.rawValue, comment: "")

@@ -64,6 +64,7 @@ class RepoModel: ObservableObject {
     }
 
     private init() {
+        favouriteItems = storedFavouriteItems
         loadMoreItems()
     }
     
@@ -107,8 +108,24 @@ extension RepoModel {
         } else {
             favouriteItems.append(item)
         }
+        storedFavouriteItems = favouriteItems
         changed()
     }
+    
+    private var storedFavouriteItems: [RepoItem] {
+        get {
+            guard let items = UserDefaults.standard.array(forKey: "favourites") else { return [] }
+            return items.compactMap {
+                guard let it = $0 as? [String: Any] else { return nil }
+                return RepoItem(it)
+            }
+        }
+        set {
+            let items = newValue.map { $0.dictionary }
+            UserDefaults.standard.set(items, forKey: "favourites")
+        }
+    }
+
 }
 
 // TODO: redo later

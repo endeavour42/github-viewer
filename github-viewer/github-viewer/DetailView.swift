@@ -9,8 +9,10 @@
 import SwiftUI
 
 struct HeaderView: View {
+    let title: String
+    
     var body: some View {
-        Text("some long text will be here this is a description that overlaps over a few lines")
+        Text(title)
             .font(.title)
             .padding()
     }
@@ -23,7 +25,7 @@ struct FooterView: View {
                 Button(action: {
                     print("action")
                 }) {
-                    Text("Open in GitHub")
+                    Text(localized(.open))
                 }
                 .padding(20)
                 .background(Color.blue)
@@ -51,11 +53,11 @@ struct DetailView: View {
     
     var body: some View {
         List {
-            HeaderView()
+            HeaderView(title: item.description)
             RowView(iconKey: .language, title: item.language)
-            RowView(iconKey: .forks, title: String(format: "%d forks", item.forks))
-            RowView(iconKey: .stars, title: String(format: "%d stars", item.stars))
-            RowView(iconKey: .date, title: String(format: "Created %d years ago at %@", 123, "456"))
+            RowView(iconKey: .forks, title: String(format: localized(.forksFormat), item.forks))
+            RowView(iconKey: .stars, title: String(format: localized(.starsFormat), item.stars))
+            RowView(iconKey: .date, title: String(format: localized(.dateFormat), 123, "456"))
             FooterView()
         }
     }

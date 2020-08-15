@@ -20,6 +20,8 @@
 		27D2053C24E76B13009EDB32 /* MasterRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D2053B24E76B13009EDB32 /* MasterRowView.swift */; };
 		27D2053E24E76DAD009EDB32 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D2053D24E76DAD009EDB32 /* Icons.swift */; };
 		27D2054024E77356009EDB32 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D2053F24E77356009EDB32 /* DetailView.swift */; };
+		27D2054224E77982009EDB32 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D2054124E77982009EDB32 /* Strings.swift */; };
+		27D2054424E779C8009EDB32 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27D2054324E779C8009EDB32 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		27D2053B24E76B13009EDB32 /* MasterRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterRowView.swift; sourceTree = "<group>"; };
 		27D2053D24E76DAD009EDB32 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		27D2053F24E77356009EDB32 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		27D2054124E77982009EDB32 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		27D2054324E779C8009EDB32 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,8 @@
 			children = (
 				27800A9D24E75B50007607B0 /* AppDelegate.swift */,
 				27D2053D24E76DAD009EDB32 /* Icons.swift */,
+				27D2054124E77982009EDB32 /* Strings.swift */,
+				27D2054324E779C8009EDB32 /* Localizable.strings */,
 				27800A9F24E75B50007607B0 /* MasterController.swift */,
 				27D2053324E75E1F009EDB32 /* RepoItem.swift */,
 				27D2053524E75F66009EDB32 /* RepoModel.swift */,
@@ -147,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27800AAA24E75B51007607B0 /* LaunchScreen.storyboard in Resources */,
+				27D2054424E779C8009EDB32 /* Localizable.strings in Resources */,
 				27800AA724E75B51007607B0 /* Assets.xcassets in Resources */,
 				27800AA524E75B50007607B0 /* Main.storyboard in Resources */,
 			);
@@ -160,6 +167,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27800AA224E75B50007607B0 /* DetailController.swift in Sources */,
+				27D2054224E77982009EDB32 /* Strings.swift in Sources */,
 				27800AA024E75B50007607B0 /* MasterController.swift in Sources */,
 				27D2053424E75E1F009EDB32 /* RepoItem.swift in Sources */,
 				27D2054024E77356009EDB32 /* DetailView.swift in Sources */,

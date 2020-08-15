@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  github-viewer
+
+  Created by Mike on 15/08/2020.
+  Copyright © 2020 Mike Kluev. All rights reserved.
+*/
+
+"forksFormat" = "%d Forks";
+"starsFormat" = "%d Stars";
+"dateFormat" = "Created %d years ago at %@";

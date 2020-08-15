@@ -18,3 +18,10 @@ extension String {
         return strings.contains { $0.localizedCaseInsensitiveContains(self) }
     }
 }
+
+extension DateFormatter {
+    convenience init(dateFormat: String) {
+        self.init()
+        self.dateFormat = dateFormat
+    }
+}

@@ -12,7 +12,7 @@ import SwiftUI
 class DetailController: UIViewController {
 
     private var vc: UIViewController!
-    
+
     var item: RepoItem? {
         didSet {
             vc?.removeFromParent()

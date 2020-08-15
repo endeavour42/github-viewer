@@ -12,13 +12,12 @@ var temp: Int = 0 // TODO: remove later
 
 class MasterController: UIViewController {
     
+    @IBOutlet private weak var collectionView: UICollectionView!
+    
     typealias DataSource = UICollectionViewDiffableDataSource<String, RepoItem>
     typealias Snapshot = NSDiffableDataSourceSnapshot<String, RepoItem>
     
     private let showDetail = "showDetail"
-
-    private var collectionLayout: UICollectionViewFlowLayout!
-    private var collectionView: UICollectionView!
 
     private var detailController: DetailController?
     private var dataSource: DataSource!
@@ -28,16 +27,12 @@ class MasterController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionLayout = UICollectionViewFlowLayout()
+        //let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: collectionLayout)
         collectionView.register(MasterRowCell.self, forCellWithReuseIdentifier: MasterRowCell.identifier)
         collectionView.delegate = self
-        collectionView.autoresizingMask = .flexibleSize
-        collectionView.isScrollEnabled = true
-        collectionView.alwaysBounceVertical = true
-        collectionView.backgroundColor = .systemBackground
-        view.addSubview(collectionView)
+        //collectionView.backgroundColor = .systemBackground
+        //view.addSubview(collectionView)
         
         dataSource = DataSource(collectionView: collectionView, cellProvider: cellProvider)
         

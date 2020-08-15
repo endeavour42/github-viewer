@@ -62,17 +62,49 @@
                     <view key="view" contentMode="scaleToFill" id="leB-7A-HmZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cQC-Pg-YbB">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="782"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zsd-ek-Uw5">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dgq-b2-Xjp">
+                                <rect key="frame" x="0.0" y="782" width="414" height="114"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <tabBarItem systemItem="favorites" id="YqP-ty-xJt"/>
+                                    <tabBarItem systemItem="more" id="GII-Mu-sDU"/>
+                                </items>
+                            </tabBar>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="cQC-Pg-YbB" secondAttribute="trailing" id="8jg-0h-6JQ"/>
+                            <constraint firstItem="Dgq-b2-Xjp" firstAttribute="top" secondItem="cQC-Pg-YbB" secondAttribute="bottom" id="Izt-4j-z4q"/>
+                            <constraint firstAttribute="bottom" secondItem="Dgq-b2-Xjp" secondAttribute="bottom" id="ezm-Em-RXx"/>
+                            <constraint firstItem="Dgq-b2-Xjp" firstAttribute="leading" secondItem="leB-7A-HmZ" secondAttribute="leading" id="gxB-dp-kKs"/>
+                            <constraint firstItem="Dgq-b2-Xjp" firstAttribute="top" secondItem="cFC-Hl-1dR" secondAttribute="bottom" constant="-80" id="kg2-XO-aAW"/>
+                            <constraint firstItem="cQC-Pg-YbB" firstAttribute="leading" secondItem="leB-7A-HmZ" secondAttribute="leading" id="rLz-NX-TNZ"/>
+                            <constraint firstItem="cQC-Pg-YbB" firstAttribute="top" secondItem="leB-7A-HmZ" secondAttribute="top" id="srC-H5-j4d"/>
+                            <constraint firstAttribute="trailing" secondItem="Dgq-b2-Xjp" secondAttribute="trailing" id="tsx-B6-fkB"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="cFC-Hl-1dR"/>
                     </view>
                     <navigationItem key="navigationItem" id="mEW-Tp-Vet"/>
                     <connections>
+                        <outlet property="collectionView" destination="cQC-Pg-YbB" id="Hjg-aW-DOs"/>
                         <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showDetail" id="Tv5-on-UFi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wn9-c9-vvV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="709" y="-630"/>
+            <point key="canvasLocation" x="708.69565217391312" y="-630.13392857142856"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="r7l-gg-dq7">

@@ -48,7 +48,8 @@ extension URLSession {
             return
         }
         
-        dataTask(with: url) { data, response, err in
+        startDataTask(with: url) { data, response, err in
+            
             guard let data = data, err == nil else {
                 execute([], nil, err)
                 return
@@ -64,6 +65,6 @@ extension URLSession {
             }
             let nextUrl = parseNextUrl(from: response)
             execute(repoResult.items, nextUrl, nil)
-        }.resume()
+        }
     }
 }

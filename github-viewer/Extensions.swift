@@ -48,13 +48,54 @@ extension URLSessionConfiguration {
 
 extension URLSession {
     func loadImage(from url: URL, execute: @escaping (_ image: UIImage?) -> Void) {
-        dataTask(with: url) { data, response, error in
+        startDataTask(with: url) { data, response, error in
             execute(data != nil && error == nil ? UIImage(data: data!) : nil)
-        }.resume()
+        }
+    }
+    
+    @discardableResult
+    func startDataTask(with url: URL, execute: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+        let task = dataTask(with: url) { data, response, error in
+            NetworkActivity.singleton.stop()
+            execute(data, response, error)
+        }
+        NetworkActivity.singleton.start()
+        task.resume()
+        return task
     }
     
     static let caching = URLSession(configuration: .caching)
     static let revallidating = URLSession(configuration: .revalidating)
+}
+
+class NetworkActivity {
+    
+    static let singleton = NetworkActivity()
+    private init() {}
+    
+    private var isActive: Bool = false {
+        didSet {
+            if isActive != oldValue {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = isActive // FIX deprecation later
+            }
+        }
+    }
+    
+    private var count = 0 {
+        didSet {
+            onMainThread {
+                self.isActive = self.count != 0
+            }
+        }
+    }
+    
+    func start() {
+        count += 1
+    }
+    
+    func stop() {
+        count -= 1
+    }
 }
 
 extension UIImage {

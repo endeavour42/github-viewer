@@ -17,7 +17,6 @@ simple github viewer
 * remove extra divider llines in detail view
 * fix master view selection
 * show some text when there is no content
-* show some UI when no internet is available and handle errors better
 * lay the list under the tab bar so it shows through
 * fix avatar flash that happens when you click on a favourite button
 * always show the scope segments (now they are hidden sometimes)
@@ -25,7 +24,6 @@ simple github viewer
 * fix tabBar layout
 * fix scroll position on refresh (the list shall be visually static with extra items load on top)
 * draw placeholders on borken avatar links
-* show network activity indicator
 * do a proper search via the query string (now local filtering is used) - (but check how slow/fast git api will do that)
 * get rid of storyboard
 * make app icon

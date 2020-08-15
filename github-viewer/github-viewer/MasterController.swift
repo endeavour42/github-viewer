@@ -77,7 +77,7 @@ extension MasterController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showDetail {
             if let indexPath = collectionView.indexPathsForSelectedItems?.first {
-                let item = model.items[indexPath.row]
+                let item = dataSource.snapshot().itemIdentifiers[indexPath.row]
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailController
                 controller.item = item
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem

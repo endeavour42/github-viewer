@@ -23,7 +23,12 @@ class RepoModel: ObservableObject {
     let changedNotification = Notification.Name("RepoModel.changedNotification")
     
     @Published private var favouriteItems: [RepoItem] = []
+    private var repoItems: [RepoItem] = []
 
+    var items: [RepoItem] {
+        domain == .repositories ? repoItems : favouriteItems
+    }
+    
     var domain: Domain = .repositories {
         didSet { changed() }
     }
@@ -42,11 +47,9 @@ class RepoModel: ObservableObject {
         }
     }
     
-    var items: [RepoItem] = []
-    
     private func insertNewObject() {
         let repo = RepoItem(name: String(temp), description: "desc", language: "lang", forks: 1, stars: 2, date: Date())
-        items.insert(repo, at: 0)
+        repoItems.insert(repo, at: 0)
         temp += 1
         changed()
     }
@@ -67,5 +70,6 @@ extension RepoModel {
         } else {
             favouriteItems.append(item)
         }
+        changed()
     }
 }

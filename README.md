@@ -14,7 +14,7 @@ Anything else
 ![iphoneScreenshot](https://github.com/mikekl/github-viewer/blob/master/screenshots/iphone.png)
 
 ## mac:
-![macScreenshot](https://github.com/mikekl/github-viewer/blob/master/screenshots/iphone.png)
+![macScreenshot](https://github.com/mikekl/github-viewer/blob/master/screenshots/mac.png)
 
 ## Uses/Has:
 * UIKit

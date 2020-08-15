@@ -52,6 +52,8 @@
 		27D2056524E8281B009EDB32 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		27D2056624E8281B009EDB32 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		27D2056724E82B6E009EDB32 /* github-viewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "github-viewer.entitlements"; sourceTree = "<group>"; };
+		27D2056924E862DC009EDB32 /* mac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mac.png; sourceTree = "<group>"; };
+		27D2056A24E862DC009EDB32 /* iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphone.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			children = (
 				27D2056524E8281B009EDB32 /* LICENSE */,
 				27D2056624E8281B009EDB32 /* README.md */,
+				27D2056824E862DC009EDB32 /* screenshots */,
 				27800A9C24E75B50007607B0 /* github-viewer */,
 				27800A9B24E75B50007607B0 /* Products */,
 			);
@@ -115,6 +118,15 @@
 				27D2056124E82617009EDB32 /* Localizable.strings */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		27D2056824E862DC009EDB32 /* screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				27D2056924E862DC009EDB32 /* mac.png */,
+				27D2056A24E862DC009EDB32 /* iphone.png */,
+			);
+			path = screenshots;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -32,4 +32,7 @@ TODO:
 • make app icon
 • make launch screen
 • make mac catalyst version
+• move diffable data source applying to a background queue
 • get rid of UIKit/collection view and reimplement in SwiftUI
+• simplify project folder structure
+• fix readme formatting

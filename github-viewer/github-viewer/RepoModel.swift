@@ -61,7 +61,7 @@ class RepoModel: ObservableObject {
     
     func loadMoreItems(execute: (() -> Void)? = nil) {
         if domain == .repositories {
-            URLSession.shared.loadRepos(from: nextUrl, since: Date() - period.timeInterval) { items, nextUrl in
+            URLSession.cachingSession.loadRepos(from: nextUrl, since: Date() - period.timeInterval) { items, nextUrl in
                 self.nextUrl = nextUrl
                 var newItems = items
                 newItems.removeAll { it in

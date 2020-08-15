@@ -4,6 +4,12 @@ simple github viewer
 ## Author:
 Mike Kluev
 
+## What it does:
+Lists trending github repositories sorted by star count for day/month and year periods. Just that.
+
+## What it does not:
+Anything else
+
 ## Uses/Has:
 * UIKit
 * UICollectionView

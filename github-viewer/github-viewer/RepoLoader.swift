@@ -11,9 +11,9 @@ import Foundation
 extension URLSession {
     private static let repoDateFormatter = DateFormatter(dateFormat: "yyyy-MM-dd")
     
-    func loadRepos(since: Date, execute: @escaping ([RepoItem]) -> Void) {
+    func loadRepos(fromUrl: URL?, since: Date, execute: @escaping ([RepoItem], _ nextUrl: URL?) -> Void) {
         
-        func makeUrl() -> URL {
+        func makeNewUrl() -> URL {
             let dateString = URLSession.repoDateFormatter.string(from: since)
             
             var components = URLComponents()
@@ -31,11 +31,24 @@ extension URLSession {
             return components.url!
         }
         
-        let url = makeUrl()
+        func parseNextUrl(from response: URLResponse?) -> URL?  {
+            let r = response as! HTTPURLResponse
+            let link = r.value(forHTTPHeaderField: "link")
+            let comps1 = link?.components(separatedBy: #">; rel="next"#)
+            let head = comps1?.first
+            let comps2 = head?.components(separatedBy: "<")
+            let that = comps2?.last
+            let nextUrl = head != nil ? URL(string: that!) : nil
+            print("nextUrl: \(nextUrl)")
+            return nextUrl
+        }
+
+        let url = fromUrl ?? makeNewUrl()
         
         dataTask(with: url) { data, response, error in
             let repoResult = try! JSONDecoder().decode(RepoResult.self, from: data!)
-            execute(repoResult.items)
+            let nextUrl = parseNextUrl(from: response)
+            execute(repoResult.items, nextUrl)
         }.resume()
     }
 }

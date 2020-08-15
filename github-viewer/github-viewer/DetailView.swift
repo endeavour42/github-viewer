@@ -68,7 +68,7 @@ struct DetailView: View {
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let item = RepoItem(name: "name", description: "desc", stargazers_count: 1, language: "lang", forks: 2, created_at: "2020-01-01T01:01:01Z", html_url: "111", owner: RepoItem.Owner(login: "login", avatar_url: nil))
+        let item = RepoItem(id: 1, name: "name", description: "desc", stargazers_count: 1, language: "lang", forks: 2, created_at: "2020-01-01T01:01:01Z", html_url: "111", owner: RepoItem.Owner(id: 1, login: "login", avatar_url: nil))
         
         return DetailView(item: item)
     }

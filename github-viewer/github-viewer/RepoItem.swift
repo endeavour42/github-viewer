@@ -8,13 +8,15 @@
 
 import Foundation
 
-struct RepoItem: Hashable, Decodable {
+struct RepoItem: Identifiable, Hashable, Decodable {
     
-    struct Owner: Hashable, Decodable {
+    struct Owner: Identifiable, Hashable, Decodable {
+        let id: Int
         let login: String
         let avatar_url: String?
     }
     
+    let id: Int
     let name: String
     let description: String?
     let stargazers_count: Int

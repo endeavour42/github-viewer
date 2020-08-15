@@ -44,10 +44,17 @@ class RepoModel: ObservableObject {
         loadMoreItems()
     }
     
+    private var nextUrl: URL?
+    
     func loadMoreItems(execute: (() -> Void)? = nil) {
         if domain == .repositories {
-            URLSession.shared.loadRepos(since: Date() - 100500) { items in
-                self.repoItems.insert(contentsOf: items, at: 0)
+            URLSession.shared.loadRepos(fromUrl: nextUrl, since: Date() - 100500) { items, nextUrl in
+                self.nextUrl = nextUrl
+                var newItems = items
+                newItems.removeAll { it in
+                    self.repoItems.contains { $0.id == it.id }
+                }
+                self.repoItems.insert(contentsOf: newItems, at: 0)
                 execute?()
             }
         } else {

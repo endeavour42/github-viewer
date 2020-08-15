@@ -23,6 +23,11 @@ class MasterController: UIViewController {
     private var dataSource: DataSource!
 
     var model: RepoModel { RepoModel.singleton }
+    
+    private var searchText: String? {
+        didSet {
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +43,8 @@ class MasterController: UIViewController {
         
         let controllers = splitViewController!.viewControllers
         detailController = (controllers.last as! UINavigationController).topViewController as? DetailController
+        
+        setupSearch()
         
         NotificationCenter.default.addObserver(forName: model.changedNotification, object: nil, queue: nil) { _ in
             self.applyModelChanges()
@@ -74,7 +81,7 @@ extension MasterController {
     }
 }
 
-// MARK: TableView
+// MARK: CollectionView
 
 extension MasterController {
     private func cellProvider(_ collectionView: UICollectionView, _ indexPath: IndexPath, _ item: RepoItem) -> UICollectionViewCell? {
@@ -93,5 +100,34 @@ extension MasterController: UICollectionViewDelegate {
 extension MasterController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: collectionView.bounds.width, height: 90)
+    }
+}
+
+// MARK: Search
+
+extension MasterController {
+    private func setupSearch() {
+        let sc = UISearchController(searchResultsController: nil)
+        sc.obscuresBackgroundDuringPresentation = false
+        sc.hidesNavigationBarDuringPresentation = false
+        let sb = sc.searchBar
+        sb.delegate = self
+        sb.scopeButtonTitles = ["day", "month", "year"]
+        sb.showsScopeBar = true
+        
+        navigationItem.searchController = sc
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+}
+
+extension MasterController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchString: String) {
+        searchText = searchString
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
+        searchText = nil
+    }
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
     }
 }

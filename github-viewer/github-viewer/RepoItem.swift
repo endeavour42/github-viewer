@@ -8,11 +8,15 @@
 
 import Foundation
 
-struct RepoItem: Hashable {
+struct RepoItem: Hashable, Decodable {
     let name: String
     let description: String
     let language: String
     let forks: Int
     let stars: Int
     let date: Date
+}
+
+struct RepoResult: Decodable {
+    let items: [RepoItem]
 }

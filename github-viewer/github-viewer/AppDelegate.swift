@@ -14,6 +14,7 @@ class AppDelegate: UIResponder {
 }
 
 extension AppDelegate: UIApplicationDelegate {
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let svc = window!.rootViewController as! UISplitViewController
         svc.preferredDisplayMode = .allVisible
@@ -22,6 +23,10 @@ extension AppDelegate: UIApplicationDelegate {
         svc.delegate = self
         
         UITableView.appearance().tableFooterView = UIView()
+        
+        URLCache.shared.diskCapacity = 50_000_000
+        URLCache.shared.memoryCapacity = 50_000_000
+        
         return true
     }
 }

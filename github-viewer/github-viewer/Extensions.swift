@@ -34,15 +34,26 @@ func onMainThread(execute: @escaping () -> Void) {
     }
 }
 
+private let testCache = false
+
+extension URLSessionConfiguration {
+    static var cachingConfiguration: URLSessionConfiguration = {
+        let config = URLSessionConfiguration.default
+        config.requestCachePolicy = testCache ? .returnCacheDataDontLoad : .returnCacheDataElseLoad
+        return config
+    }()
+}
+
 extension URLSession {
     func loadImage(from url: URL, execute: @escaping (_ image: UIImage?) -> Void) {
         dataTask(with: url) { data, response, error in
             execute(data != nil && error == nil ? UIImage(data: data!) : nil)
         }.resume()
     }
+    
+    static let cachingSession = URLSession(configuration: .cachingConfiguration)
 }
 
 extension UIImage {
     static let empty = UIImage()
 }
-

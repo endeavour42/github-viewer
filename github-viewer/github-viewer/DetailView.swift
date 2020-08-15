@@ -47,13 +47,15 @@ struct RowView: View {
 }
 
 struct DetailView: View {
+    let item: RepoItem
+    
     var body: some View {
         List {
             HeaderView()
-            RowView(iconKey: .language, title: "language")
-            RowView(iconKey: .forks, title: "forks")
-            RowView(iconKey: .stars, title: "stars")
-            RowView(iconKey: .date, title: "date")
+            RowView(iconKey: .language, title: item.language)
+            RowView(iconKey: .forks, title: String(format: "%d forks", item.forks))
+            RowView(iconKey: .stars, title: String(format: "%d stars", item.stars))
+            RowView(iconKey: .date, title: String(format: "Created %d years ago at %@", 123, "456"))
             FooterView()
         }
     }
@@ -61,6 +63,6 @@ struct DetailView: View {
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView()
+        DetailView(item: RepoItem(name: "name", description: "desc", language: "lang", forks: 1, stars: 2, date: Date()))
     }
 }

@@ -18,10 +18,10 @@ struct MasterRowView: View {
                     .resizable()
                     .frame(width: 50, height: 50)
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(item.title)
+                    Text(item.name)
                         .font(.headline)
                         .foregroundColor(.primary)
-                    Text(item.subtitle)
+                    Text(item.description)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
@@ -40,6 +40,6 @@ struct MasterRowView: View {
 
 struct MasterRowView_Previews: PreviewProvider {
     static var previews: some View {
-        MasterRowView(item: RepoItem(title: "title", subtitle: "subtleHere"))
+        MasterRowView(item: RepoItem(name: "name", description: "desc", language: "lang", forks: 1, stars: 2, date: Date()))
     }
 }

@@ -15,7 +15,7 @@ class MasterController: UIViewController {
     typealias DataSource = UITableViewDiffableDataSource<String, RepoItem>
     typealias Snapshot = NSDiffableDataSourceSnapshot<String, RepoItem>
     
-    let showDetail = "showDetail"
+    private let showDetail = "showDetail"
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -43,8 +43,6 @@ class MasterController: UIViewController {
     }
     
     private func applyModelChanges() {
-        self.tableView.reloadData() // REDO
-        
         var snapshot = Snapshot()
         snapshot.appendSections(["rows"])
         snapshot.appendItems(model.items)

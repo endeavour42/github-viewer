@@ -15,9 +15,7 @@ class MasterController: UIViewController {
     typealias DataSource = UITableViewDiffableDataSource<String, RepoItem>
     typealias Snapshot = NSDiffableDataSourceSnapshot<String, RepoItem>
     
-    enum Segues: String {
-        case showDetail
-    }
+    let showDetail = "showDetail"
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -63,7 +61,7 @@ class MasterController: UIViewController {
 
 extension MasterController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
+        if segue.identifier == showDetail {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let item = model.items[indexPath.row]
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailController
@@ -87,6 +85,6 @@ extension MasterController {
 
 extension MasterController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: Segues.showDetail.rawValue, sender: nil)
+        performSegue(withIdentifier: showDetail, sender: nil)
     }
 }

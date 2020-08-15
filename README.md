@@ -20,6 +20,8 @@ Anything else
 * preliminary localization support
 * network activity indicator
 * iphone / ipad / mac catalyst support
+* simple local persistence
+* partial work offline functionality
 
 ## TODO:
 * fix caching, now it is too aggressive and doesn't revalidate resources

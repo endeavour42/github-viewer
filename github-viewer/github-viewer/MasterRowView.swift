@@ -14,7 +14,7 @@ struct MasterRowView: View {
     var body: some View {
         VStack {
             HStack(spacing: 10) {
-                Image(systemName: "command")
+                Image(.command)
                     .resizable()
                     .frame(width: 50, height: 50)
                 VStack(alignment: .leading, spacing: 4) {
@@ -26,11 +26,11 @@ struct MasterRowView: View {
                         .foregroundColor(.secondary)
                 }
                 Spacer()
-                Image(systemName: "bookmark")
+                Image(.bookmark)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 20, height: 24)
-                Image(systemName: "chevron.right")
+                Image(.chevron_right)
             }
             Divider()
         }

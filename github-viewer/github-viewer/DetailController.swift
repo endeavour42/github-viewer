@@ -20,7 +20,7 @@ class DetailController: UIViewController {
             vc = nil
             
             if let item = item {
-                vc = UIHostingController(rootView: MasterRowView(item: item))
+                vc = UIHostingController(rootView: DetailView())
                 addChild(vc)
                 let v = vc.view!
                 v.frame = view.bounds

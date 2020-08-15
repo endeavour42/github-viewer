@@ -19,6 +19,8 @@ extension AppDelegate: UIApplicationDelegate {
         let navVC = svc.viewControllers.last as! UINavigationController
         navVC.topViewController!.navigationItem.leftBarButtonItem = svc.displayModeButtonItem
         svc.delegate = self
+        
+        UITableView.appearance().tableFooterView = UIView()
         return true
     }
 }

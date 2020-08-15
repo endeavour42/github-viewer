@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MasterRowView: View {
     let item: RepoItem
-    @ObservedObject var model = RepoModel.singleton
+    @ObservedObject private var model = RepoModel.singleton
     
     var body: some View {
         VStack {
@@ -22,7 +22,7 @@ struct MasterRowView: View {
                     .clipShape(Circle())
 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(item.name)
+                    Text(item.login + "/" + item.name)
                         .font(.headline)
                         .foregroundColor(.primary)
                     Text(item.description ?? localized(.noDescription))

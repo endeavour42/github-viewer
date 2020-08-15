@@ -40,6 +40,10 @@ struct RepoItem: Identifiable, Hashable, Decodable {
         guard let string = owner.avatar_url else { return nil }
         return URL(string: string)
     }
+    
+    var htmlUrl: URL? {
+        return URL(string: html_url)
+    }
 }
 
 struct RepoResult: Decodable {

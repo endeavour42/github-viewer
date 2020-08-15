@@ -15,6 +15,8 @@ class DetailController: UIViewController {
 
     var item: RepoItem? {
         didSet {
+            title = item?.name
+            
             vc?.removeFromParent()
             vc?.view?.removeFromSuperview()
             vc = nil

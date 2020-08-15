@@ -13,19 +13,23 @@ struct HeaderView: View {
     
     var body: some View {
         Text(title)
-            .font(.title)
+            .font(.headline)
             .padding()
     }
 }
 
 struct FooterView: View {
+    let url: URL?
+    
     var body: some View {
             HStack() {
                 Spacer()
                 Button(action: {
-                    print("action")
+                    if let url = self.url {
+                        UIApplication.shared.open(url, options: [:])
+                    }
                 }) {
-                    Text(localized(.open))
+                    Text(localized(.openInGitHub))
                 }
                 .padding(20)
                 .background(Color.blue)
@@ -37,12 +41,14 @@ struct FooterView: View {
 }
 
 struct RowView: View {
-    var iconKey: SystemIconKey
-    var title: String
+    let iconKey: SystemIconKey
+    let title: String
     
     var body: some View {
         HStack {
-            Image(iconKey).resizable().frame(width: 18, height: 18)
+            Image(iconKey)
+                .resizable()
+                .frame(width: 18, height: 18)
             Text(title)
         }
     }
@@ -59,7 +65,7 @@ struct DetailView: View {
                 RowView(iconKey: .forks, title: String(format: localized(.forksFormat), item.forks))
                 RowView(iconKey: .stars, title: String(format: localized(.starsFormat), item.stargazers_count))
                 RowView(iconKey: .date, title: String(format: localized(.dateFormat), 123, "456"))
-                FooterView()
+                FooterView(url: item.htmlUrl)
             }
         }
     }

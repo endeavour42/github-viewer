@@ -22,6 +22,8 @@ class RepoModel: ObservableObject {
     
     let changedNotification = Notification.Name("RepoModel.changedNotification")
     
+    private var nextUrl: URL?
+    
     @Published private var favouriteItems: [RepoItem] = []
     
     private var repoItems: [RepoItem] = [] {
@@ -33,7 +35,10 @@ class RepoModel: ObservableObject {
     }
     
     var domain: Domain = .repositories {
-        didSet { changed() }
+        didSet {
+            guard domain != oldValue else { return }
+            changed()
+		}
     }
     
     var period: Period = .day {
@@ -54,11 +59,9 @@ class RepoModel: ObservableObject {
         loadMoreItems()
     }
     
-    private var nextUrl: URL?
-    
     func loadMoreItems(execute: (() -> Void)? = nil) {
         if domain == .repositories {
-            URLSession.shared.loadRepos(fromUrl: nextUrl, since: Date() - period.timeInterval) { items, nextUrl in
+            URLSession.shared.loadRepos(from: nextUrl, since: Date() - period.timeInterval) { items, nextUrl in
                 self.nextUrl = nextUrl
                 var newItems = items
                 newItems.removeAll { it in

@@ -11,9 +11,9 @@ import Foundation
 extension URLSession {
     private static let repoDateFormatter = DateFormatter(dateFormat: "yyyy-MM-dd")
     
-    func loadRepos(fromUrl: URL?, since: Date, execute: @escaping ([RepoItem], _ nextUrl: URL?) -> Void) {
+    func loadRepos(from fromUrl: URL?, since: Date, itemCountPerPage: Int = 3, execute: @escaping ([RepoItem], _ nextUrl: URL?) -> Void) {
         
-        func makeNewUrl() -> URL {
+        func makeNewUrl() -> URL? {
             let dateString = URLSession.repoDateFormatter.string(from: since)
             
             var components = URLComponents()
@@ -26,9 +26,9 @@ extension URLSession {
                 URLQueryItem(name: "sort", value: "stars"),
                 URLQueryItem(name: "order", value: "desc"),
                 URLQueryItem(name: "accept", value: "application/vnd.github.v3+json"),
-                URLQueryItem(name: "per_page", value: String(3))
+                URLQueryItem(name: "per_page", value: String(itemCountPerPage))
             ]
-            return components.url!
+            return components.url
         }
         
         func parseNextUrl(from response: URLResponse?) -> URL?  {
@@ -43,7 +43,10 @@ extension URLSession {
             return nextUrl
         }
 
-        let url = fromUrl ?? makeNewUrl()
+        guard let url = fromUrl ?? makeNewUrl() else {
+            execute([], nil)
+            return
+        }
         
         dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else {

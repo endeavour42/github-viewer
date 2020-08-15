@@ -18,8 +18,8 @@ extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let svc = window!.rootViewController as! UISplitViewController
         svc.preferredDisplayMode = .allVisible
-        let navVC = svc.viewControllers.last as! UINavigationController
-        navVC.topViewController!.navigationItem.leftBarButtonItem = svc.displayModeButtonItem
+        let nav = svc.viewControllers.last as! UINavigationController
+        nav.topViewController!.navigationItem.leftBarButtonItem = svc.displayModeButtonItem
         svc.delegate = self
         
         UITableView.appearance().tableFooterView = UIView()
@@ -33,9 +33,9 @@ extension AppDelegate: UIApplicationDelegate {
 
 extension AppDelegate: UISplitViewControllerDelegate {
     func splitViewController(_ svc: UISplitViewController, collapseSecondary secondaryVC: UIViewController, onto: UIViewController) -> Bool {
-        guard let navVC = secondaryVC as? UINavigationController else { return false }
-        guard let detailVC = navVC.topViewController as? DetailController else { return false }
-        if detailVC.item == nil {
+        guard let nav = secondaryVC as? UINavigationController else { return false }
+        guard let detailController = nav.topViewController as? DetailController else { return false }
+        if detailController.item == nil {
             // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
             return true
         }

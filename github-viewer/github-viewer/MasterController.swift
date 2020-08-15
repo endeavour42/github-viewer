@@ -8,22 +8,20 @@
 
 import UIKit
 
-var temp: Int = 0 // TODO: remove later
-
 class MasterController: UIViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var tabBar: UITabBar!
 
-    typealias DataSource = UICollectionViewDiffableDataSource<String, RepoItem>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<String, RepoItem>
+    private typealias DataSource = UICollectionViewDiffableDataSource<String, RepoItem>
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<String, RepoItem>
     
-    private let showDetail = "showDetail"
-
-    private var detailController: DetailController?
     private var dataSource: DataSource!
+    
+    private var detailController: DetailController?
+    private let showDetailSegue = "showDetail"
 
-    var model: RepoModel { RepoModel.singleton }
+    private var model: RepoModel { RepoModel.singleton }
     
     private var searchText: String? {
         didSet {
@@ -34,18 +32,12 @@ class MasterController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        
-        collectionView.register(MasterRowCell.self, forCellWithReuseIdentifier: MasterRowCell.identifier)
-        collectionView.delegate = self
-        //collectionView.backgroundColor = .systemBackground
-        //view.addSubview(collectionView)
-        
-        dataSource = DataSource(collectionView: collectionView, cellProvider: cellProvider)
+        title = localized(.repositories)
         
         let controllers = splitViewController!.viewControllers
         detailController = (controllers.last as! UINavigationController).topViewController as? DetailController
         
+        setupCollectionView()
         setupSearch()
         setupTabBar()
         setupRefreshControl()
@@ -54,6 +46,12 @@ class MasterController: UIViewController {
             self.applyModelChanges()
         }
         applyModelChanges()
+    }
+    
+    private func setupCollectionView() {
+        collectionView.register(MasterRowCell.self, forCellWithReuseIdentifier: MasterRowCell.identifier)
+        collectionView.delegate = self
+        dataSource = DataSource(collectionView: collectionView, cellProvider: cellProvider)
     }
     
     private func applyModelChanges() {
@@ -76,7 +74,7 @@ class MasterController: UIViewController {
 
 extension MasterController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showDetail {
+        if segue.identifier == showDetailSegue {
             if let indexPath = collectionView.indexPathsForSelectedItems?.first {
                 let item = dataSource.snapshot().itemIdentifiers[indexPath.row]
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailController
@@ -100,7 +98,7 @@ extension MasterController {
 
 extension MasterController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: showDetail, sender: nil)
+        performSegue(withIdentifier: showDetailSegue, sender: nil)
     }
 }
 

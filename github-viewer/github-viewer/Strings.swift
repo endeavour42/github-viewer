@@ -9,15 +9,17 @@
 import Foundation
 
 enum StringKey: String {
+    case repositories
+    case favourites
+    case noLanguage = "No language"
+    case noDescription = "No description"
     case forksFormat = "%d Forks"
     case starsFormat = "%d Stars"
     case dateFormat = "Created %d years ago at %@"
-    case open = "Open in GitHub"
+    case openInGitHub = "Open in GitHub"
     case day
     case month
     case year
-    case noLanguage = "No language"
-    case noDescription = "No description"
 }
 
 func localized(_ key: StringKey) -> String {

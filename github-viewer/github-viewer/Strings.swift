@@ -11,12 +11,12 @@ import Foundation
 enum StringKey: String {
     case repositories
     case favourites
-    case noLanguage = "No language"
-    case noDescription = "No description"
-    case forksFormat = "%d Forks"
-    case starsFormat = "%d Stars"
-    case dateFormat = "Created %d years ago at %@"
-    case openInGitHub = "Open in GitHub"
+    case noLanguage
+    case noDescription
+    case forksFormat
+    case starsFormat
+    case dateFormat
+    case openInGitHub
     case day
     case month
     case year

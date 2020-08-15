@@ -22,20 +22,20 @@ struct FooterView: View {
     let url: URL?
     
     var body: some View {
-            HStack() {
-                Spacer()
-                Button(action: {
-                    if let url = self.url {
-                        UIApplication.shared.open(url, options: [:])
-                    }
-                }) {
-                    Text(localized(.openInGitHub))
+        HStack() {
+            Spacer()
+            Button(action: {
+                if let url = self.url {
+                    UIApplication.shared.open(url, options: [:])
                 }
-                .padding(20)
-                .background(Color.blue)
-                .cornerRadius(10)
-                Spacer()
+            }) {
+                Text(localized(.openInGitHub))
             }
+            .padding(20)
+            .background(Color.blue)
+            .cornerRadius(10)
+            Spacer()
+        }
         .padding()
     }
 }
@@ -57,6 +57,10 @@ struct RowView: View {
 struct DetailView: View {
     let item: RepoItem!
     
+    var daysAgo: Int {
+        Int(Date().timeIntervalSince(item.createdDate) / RepoModel.Period.day.timeInterval)
+    }
+    
     var body: some View {
         List {
             if item != nil {
@@ -64,7 +68,7 @@ struct DetailView: View {
                 RowView(iconKey: .language, title: item.language ?? localized(.noLanguage))
                 RowView(iconKey: .forks, title: String(format: localized(.forksFormat), item.forks))
                 RowView(iconKey: .stars, title: String(format: localized(.starsFormat), item.stargazers_count))
-                RowView(iconKey: .date, title: String(format: localized(.dateFormat), 123, "456"))
+                RowView(iconKey: .date, title: String(format: localized(.dateFormat), daysAgo, item.createdDate.toString(dateStyle: .short, timeStyle: .none)))
                 FooterView(url: item.htmlUrl)
             }
         }

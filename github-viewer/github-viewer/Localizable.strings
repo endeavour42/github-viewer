@@ -12,7 +12,8 @@
 "noLanguage" = "No language";
 "forksFormat" = "%d Forks";
 "starsFormat" = "%d Stars";
-"dateFormat" = "Created %d years ago at %@";
+"dateFormat" = "Created %d days ago at %@";
 "day" = "Day";
 "month" = "Month";
 "year" = "Year";
+"openInGitHub" = "Open in GitHub";

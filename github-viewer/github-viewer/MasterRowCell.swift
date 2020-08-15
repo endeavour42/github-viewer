@@ -27,6 +27,7 @@ class MasterRowCell: UICollectionViewCell {
                 let v = vc.view!
                 v.frame = contentView.bounds
                 v.autoresizingMask = .flexibleSize
+                v.translatesAutoresizingMaskIntoConstraints = true
                 contentView.addSubview(v)
             }
         }

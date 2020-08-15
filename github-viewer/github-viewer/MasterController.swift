@@ -48,15 +48,9 @@ class MasterController: UIViewController {
         applyModelChanges()
     }
     
-    private func setupCollectionView() {
-        collectionView.register(MasterRowCell.self, forCellWithReuseIdentifier: MasterRowCell.identifier)
-        collectionView.delegate = self
-        dataSource = DataSource(collectionView: collectionView, cellProvider: cellProvider)
-    }
-    
     private func applyModelChanges() {
         let items = model.items
-            .filter { searchText?.contained(in: [$0.name, $0.description]) ?? true }
+            .filter { searchText?.isContained(in: [$0.name, $0.description]) ?? true }
         
         var snapshot = Snapshot()
         snapshot.appendSections(["rows"])
@@ -65,30 +59,19 @@ class MasterController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
     }
 }
 
-// MARK: Segue
+// MARK: Collection View
 
 extension MasterController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showDetailSegue {
-            if let indexPath = collectionView.indexPathsForSelectedItems?.first {
-                let item = dataSource.snapshot().itemIdentifiers[indexPath.row]
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailController
-                controller.item = item
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
-            }
-        }
+    private func setupCollectionView() {
+        collectionView.register(MasterRowCell.self, forCellWithReuseIdentifier: MasterRowCell.identifier)
+        collectionView.delegate = self
+        dataSource = DataSource(collectionView: collectionView, cellProvider: cellProvider)
     }
-}
-
-// MARK: CollectionView
-
-extension MasterController {
+    
     private func cellProvider(_ collectionView: UICollectionView, _ indexPath: IndexPath, _ item: RepoItem) -> UICollectionViewCell? {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MasterRowCell.identifier, for: indexPath) as! MasterRowCell
         cell.item = item
@@ -104,7 +87,24 @@ extension MasterController: UICollectionViewDelegate {
 
 extension MasterController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: collectionView.bounds.width, height: 90)
+        CGSize(width: collectionView.bounds.width, height: 100)
+    }
+}
+
+// MARK: Segue
+
+extension MasterController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == showDetailSegue {
+            if let indexPath = collectionView.indexPathsForSelectedItems?.first {
+                let item = dataSource.snapshot().itemIdentifiers[indexPath.row]
+                let controller = (segue.destination as! UINavigationController).topViewController as! DetailController
+                controller.item = item
+                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+                controller.navigationItem.leftItemsSupplementBackButton = true
+                detailController = controller
+            }
+        }
     }
 }
 
@@ -112,15 +112,16 @@ extension MasterController: UICollectionViewDelegateFlowLayout {
 
 extension MasterController {
     private func setupSearch() {
-        let sc = UISearchController(searchResultsController: nil)
-        sc.obscuresBackgroundDuringPresentation = false
-        sc.hidesNavigationBarDuringPresentation = false
-        let sb = sc.searchBar
-        sb.delegate = self
-        sb.scopeButtonTitles = [localized(.day), localized(.month), localized(.year)]
-        sb.showsScopeBar = true
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
         
-        navigationItem.searchController = sc
+        let searchBar = searchController.searchBar
+        searchBar.delegate = self
+        searchBar.scopeButtonTitles = [localized(.day), localized(.month), localized(.year)]
+        searchBar.showsScopeBar = true
+        
+        navigationItem.searchController = searchController
         navigationController?.navigationBar.prefersLargeTitles = true
     }
 }
@@ -129,12 +130,14 @@ extension MasterController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchString: String) {
         searchText = searchString
     }
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = nil
         searchText = nil
     }
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        model.period = RepoModel.Period(rawValue: selectedScope)!
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedIndex: Int) {
+        model.period = RepoModel.Period(rawValue: selectedIndex)!
     }
 }
 
@@ -153,7 +156,7 @@ extension MasterController: UITabBarDelegate {
     }
 }
 
-// MARK: setupRefreshControl
+// MARK: RefreshControl
 
 extension MasterController {
     

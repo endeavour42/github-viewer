@@ -11,7 +11,7 @@ import Foundation
 extension URLSession {
     private static let repoDateFormatter = DateFormatter(dateFormat: "yyyy-MM-dd")
     
-    func loadRepos(from fromUrl: URL?, since: Date, itemCountPerPage: Int = 3, execute: @escaping ([RepoItem], _ nextUrl: URL?) -> Void) {
+    func loadRepos(from fromUrl: URL?, since: Date, itemCountPerPage: Int = 10, execute: @escaping ([RepoItem], _ nextUrl: URL?) -> Void) {
         
         func makeNewUrl() -> URL? {
             let dateString = URLSession.repoDateFormatter.string(from: since)

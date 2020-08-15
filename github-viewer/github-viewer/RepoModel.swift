@@ -38,7 +38,7 @@ class RepoModel: ObservableObject {
         didSet {
             guard domain != oldValue else { return }
             changed()
-		}
+        }
     }
     
     var period: Period = .day {

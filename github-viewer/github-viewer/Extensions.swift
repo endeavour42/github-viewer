@@ -13,7 +13,7 @@ extension UIView.AutoresizingMask {
 }
 
 extension String {
-    func contained(in strings: [String?]) -> Bool {
+    func isContained(in strings: [String?]) -> Bool {
         guard !isEmpty else { return true }
         return strings.contains { $0?.localizedCaseInsensitiveContains(self) ?? false }
     }
@@ -37,8 +37,8 @@ func onMainThread(execute: @escaping () -> Void) {
 private let testCache = false
 
 extension URLSessionConfiguration {
-    static var cachingConfiguration: URLSessionConfiguration = {
-        let config = URLSessionConfiguration.default
+    static let cachingConfiguration: URLSessionConfiguration = {
+        let config: URLSessionConfiguration = .default
         config.requestCachePolicy = testCache ? .returnCacheDataDontLoad : .returnCacheDataElseLoad
         return config
     }()
@@ -56,4 +56,10 @@ extension URLSession {
 
 extension UIImage {
     static let empty = UIImage()
+}
+
+extension Date {
+    func toString(dateStyle: DateFormatter.Style, timeStyle: DateFormatter.Style) -> String {
+        DateFormatter.localizedString(from: self, dateStyle: dateStyle, timeStyle: timeStyle)
+    }
 }

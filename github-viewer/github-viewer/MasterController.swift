@@ -13,7 +13,8 @@ var temp: Int = 0 // TODO: remove later
 class MasterController: UITableViewController {
 
     var detailController: DetailController?
-    var items: [RepoItem] = []
+    
+    var model: RepoModel { RepoModel.singleton }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,21 +22,14 @@ class MasterController: UITableViewController {
         let controllers = splitViewController!.viewControllers
         detailController = (controllers.last as! UINavigationController).topViewController as? DetailController
         
-        insertNewObject()
-        insertNewObject()
-        insertNewObject()
+        NotificationCenter.default.addObserver(forName: model.changedNotification, object: nil, queue: nil) { _ in
+            self.tableView.reloadData() // REDO
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
-    }
-
-    func insertNewObject() {
-        items.insert(RepoItem(name: String(temp)), at: 0)
-        temp += 1
-        let indexPath = IndexPath(row: 0, section: 0)
-        tableView.insertRows(at: [indexPath], with: .automatic)
     }
 }
 
@@ -45,7 +39,7 @@ extension MasterController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let item = items[indexPath.row]
+                let item = model.items[indexPath.row]
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailController
                 controller.item = item
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
@@ -60,13 +54,13 @@ extension MasterController {
 extension MasterController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return model.items.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
-        let item = items[indexPath.row]
+        let item = model.items[indexPath.row]
         cell.textLabel!.text = item.name
         return cell
     }

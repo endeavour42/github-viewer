@@ -29,7 +29,6 @@ simple github viewer
 * do a proper search via the query string (now local filtering is used) - (but check how slow/fast git api will do that)
 * get rid of storyboard
 * make app icon
-* make launch screen
 * move diffable data source applying to a background queue
 * get rid of UIKit/collection view and reimplement in SwiftUI
 * simplify project folder structure

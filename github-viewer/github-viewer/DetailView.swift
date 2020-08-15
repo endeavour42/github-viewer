@@ -54,10 +54,10 @@ struct DetailView: View {
     var body: some View {
         List {
             if item != nil {
-                HeaderView(title: item.description)
-                RowView(iconKey: .language, title: item.language)
+                HeaderView(title: item.description ?? localized(.noDescription))
+                RowView(iconKey: .language, title: item.language ?? localized(.noLanguage))
                 RowView(iconKey: .forks, title: String(format: localized(.forksFormat), item.forks))
-                RowView(iconKey: .stars, title: String(format: localized(.starsFormat), item.stars))
+                RowView(iconKey: .stars, title: String(format: localized(.starsFormat), item.stargazers_count))
                 RowView(iconKey: .date, title: String(format: localized(.dateFormat), 123, "456"))
                 FooterView()
             }
@@ -67,6 +67,9 @@ struct DetailView: View {
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(item: RepoItem(name: "name", description: "desc", language: "lang", forks: 1, stars: 2, date: Date()))
+        
+        let item = RepoItem(name: "name", description: "desc", stargazers_count: 1, language: "lang", forks: 2, created_at: "2020-01-01T01:01:01Z", html_url: "111", owner: RepoItem.Owner(login: "login", avatar_url: nil))
+        
+        return DetailView(item: item)
     }
 }

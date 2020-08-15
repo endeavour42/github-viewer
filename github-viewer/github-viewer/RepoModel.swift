@@ -23,7 +23,10 @@ class RepoModel: ObservableObject {
     let changedNotification = Notification.Name("RepoModel.changedNotification")
     
     @Published private var favouriteItems: [RepoItem] = []
-    private var repoItems: [RepoItem] = []
+    
+    private var repoItems: [RepoItem] = [] {
+        didSet { changed() }
+    }
 
     var items: [RepoItem] {
         domain == .repositories ? repoItems : favouriteItems
@@ -38,21 +41,26 @@ class RepoModel: ObservableObject {
     }
 
     private init() {
-        insertNewObject()
-        insertNewObject()
-        insertNewObject()
+//        insertNewObject()
+//        insertNewObject()
+//        insertNewObject()
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//            self.insertNewObject()
+//        }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.insertNewObject()
+        URLSession.shared.loadRepos(since: Date() - 100500) { items in
+            self.repoItems.append(contentsOf: items)
         }
     }
     
-    private func insertNewObject() {
-        let repo = RepoItem(name: String(temp), description: "desc" + String(temp), language: "lang" + String(temp), forks: 1, stars: 2, date: Date())
-        repoItems.insert(repo, at: 0)
-        temp += 1
-        changed()
-    }
+//    private func insertNewObject() {
+//        let repo = RepoItem(name: String(temp), description: "desc" + String(temp), language: "lang" + String(temp), forks: 1, stars: 2, date: Date())
+//
+//        repoItems.insert(repo, at: 0)
+//        temp += 1
+//        changed()
+//    }
     
     private func changed() {
         NotificationCenter.default.post(name: changedNotification, object: self, userInfo: nil)

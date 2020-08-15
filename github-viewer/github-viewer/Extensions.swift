@@ -13,9 +13,9 @@ extension UIView.AutoresizingMask {
 }
 
 extension String {
-    func contained(in strings: [String]) -> Bool {
+    func contained(in strings: [String?]) -> Bool {
         guard !isEmpty else { return true }
-        return strings.contains { $0.localizedCaseInsensitiveContains(self) }
+        return strings.contains { $0?.localizedCaseInsensitiveContains(self) ?? false }
     }
 }
 

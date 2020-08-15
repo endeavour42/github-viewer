@@ -16,6 +16,8 @@ enum StringKey: String {
     case day
     case month
     case year
+    case noLanguage = "No language"
+    case noDescription = "No description"
 }
 
 func localized(_ key: StringKey) -> String {

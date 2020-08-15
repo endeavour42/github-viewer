@@ -22,7 +22,7 @@ struct MasterRowView: View {
                     Text(item.name)
                         .font(.headline)
                         .foregroundColor(.primary)
-                    Text(item.description)
+                    Text(item.description ?? localized(.noDescription))
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
@@ -47,6 +47,8 @@ struct MasterRowView: View {
 
 struct MasterRowView_Previews: PreviewProvider {
     static var previews: some View {
-        MasterRowView(item: RepoItem(name: "name", description: "desc", language: "lang", forks: 1, stars: 2, date: Date()))
+        let item = RepoItem(name: "name", description: "desc", stargazers_count: 1, language: "lang", forks: 2, created_at: "2020-01-01T01:01:01Z", html_url: "111", owner: RepoItem.Owner(login: "login", avatar_url: nil))
+
+        return MasterRowView(item: item)
     }
 }

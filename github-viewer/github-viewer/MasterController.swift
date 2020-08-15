@@ -13,7 +13,8 @@ var temp: Int = 0 // TODO: remove later
 class MasterController: UIViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView!
-    
+    @IBOutlet private weak var tabBar: UITabBar!
+
     typealias DataSource = UICollectionViewDiffableDataSource<String, RepoItem>
     typealias Snapshot = NSDiffableDataSourceSnapshot<String, RepoItem>
     
@@ -46,6 +47,7 @@ class MasterController: UIViewController {
         detailController = (controllers.last as! UINavigationController).topViewController as? DetailController
         
         setupSearch()
+        setupTabBar()
         
         NotificationCenter.default.addObserver(forName: model.changedNotification, object: nil, queue: nil) { _ in
             self.applyModelChanges()
@@ -133,5 +135,20 @@ extension MasterController: UISearchBarDelegate {
         searchText = nil
     }
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        model.period = RepoModel.Period(rawValue: selectedScope)!
+    }
+}
+
+// MARK: TabBar
+
+extension MasterController {
+    private func setupTabBar() {
+        tabBar.delegate = self
+    }
+}
+
+extension MasterController: UITabBarDelegate {
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        model.domain = RepoModel.Domain(rawValue: item.tag)!
     }
 }

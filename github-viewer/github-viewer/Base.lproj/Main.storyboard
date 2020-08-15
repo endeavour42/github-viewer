@@ -99,6 +99,7 @@
                     <navigationItem key="navigationItem" id="mEW-Tp-Vet"/>
                     <connections>
                         <outlet property="collectionView" destination="cQC-Pg-YbB" id="Hjg-aW-DOs"/>
+                        <outlet property="tabBar" destination="Dgq-b2-Xjp" id="bvj-Ex-F36"/>
                         <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showDetail" id="Tv5-on-UFi"/>
                     </connections>
                 </viewController>

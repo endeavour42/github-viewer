@@ -6,9 +6,9 @@
 //  Copyright © 2020 Mike Kluev. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
 
-class RepoModel {
+class RepoModel: ObservableObject {
     
     enum Domain: Int {
         case repositories, favourites
@@ -22,6 +22,8 @@ class RepoModel {
     
     let changedNotification = Notification.Name("RepoModel.changedNotification")
     
+    @Published private var favouriteItems: [RepoItem] = []
+
     var domain: Domain = .repositories {
         didSet { changed() }
     }
@@ -51,5 +53,19 @@ class RepoModel {
     
     private func changed() {
         NotificationCenter.default.post(name: changedNotification, object: self, userInfo: nil)
+    }
+}
+
+extension RepoModel {
+    func isFavourite(_ item: RepoItem) -> Bool {
+        favouriteItems.contains(item)
+    }
+    
+    func toggleFavourite(_ item: RepoItem) {
+        if isFavourite(item) {
+            favouriteItems.removeAll { $0 == item }
+        } else {
+            favouriteItems.append(item)
+        }
     }
 }

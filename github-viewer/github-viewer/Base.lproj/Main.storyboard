@@ -79,7 +79,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <tabBarItem title="Repositories" image="tray.2" catalog="system" id="YqP-ty-xJt"/>
-                                    <tabBarItem title="Favourites" image="bookmark" catalog="system" id="GII-Mu-sDU"/>
+                                    <tabBarItem tag="1" title="Favourites" image="bookmark" catalog="system" id="GII-Mu-sDU"/>
                                 </items>
                             </tabBar>
                         </subviews>

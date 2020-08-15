@@ -10,6 +10,7 @@ import SwiftUI
 
 struct MasterRowView: View {
     let item: RepoItem
+    @ObservedObject var model = RepoModel.singleton
     
     var body: some View {
         VStack {
@@ -26,11 +27,17 @@ struct MasterRowView: View {
                         .foregroundColor(.secondary)
                 }
                 Spacer()
-                Image(.bookmark)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 20, height: 24)
-                Image(.chevron_right)
+                
+                Button(action: {
+                    RepoModel.singleton.toggleFavourite(self.item)
+                }) {
+                    Image(model.isFavourite(item) ? .selectedBookmark : .bookmark)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 24, height: 24)
+                }
+                
+                Image(.disclosureTriangle)
             }
             Divider()
         }

@@ -144,6 +144,7 @@ extension MasterController: UISearchBarDelegate {
 extension MasterController {
     private func setupTabBar() {
         tabBar.delegate = self
+        tabBar.selectedItem = tabBar.items!.first!
     }
 }
 

@@ -10,7 +10,8 @@ import SwiftUI
 
 enum SystemIconKey: String {
     case bookmark
-    case chevron_right = "chevron.right"
+    case selectedBookmark = "bookmark.fill"
+    case disclosureTriangle = "chevron.right"
     
     case language = "command"
     case forks = "arrow.branch"

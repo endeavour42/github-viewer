@@ -48,7 +48,7 @@ class RepoModel: ObservableObject {
     }
     
     private func insertNewObject() {
-        let repo = RepoItem(name: String(temp), description: "desc", language: "lang", forks: 1, stars: 2, date: Date())
+        let repo = RepoItem(name: String(temp), description: "desc" + String(temp), language: "lang" + String(temp), forks: 1, stars: 2, date: Date())
         repoItems.insert(repo, at: 0)
         temp += 1
         changed()

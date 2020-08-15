@@ -16,6 +16,7 @@ class AppDelegate: UIResponder {
 extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let svc = window!.rootViewController as! UISplitViewController
+        svc.preferredDisplayMode = .allVisible
         let navVC = svc.viewControllers.last as! UINavigationController
         navVC.topViewController!.navigationItem.leftBarButtonItem = svc.displayModeButtonItem
         svc.delegate = self

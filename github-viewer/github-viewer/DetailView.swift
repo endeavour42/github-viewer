@@ -49,16 +49,18 @@ struct RowView: View {
 }
 
 struct DetailView: View {
-    let item: RepoItem
+    let item: RepoItem!
     
     var body: some View {
         List {
-            HeaderView(title: item.description)
-            RowView(iconKey: .language, title: item.language)
-            RowView(iconKey: .forks, title: String(format: localized(.forksFormat), item.forks))
-            RowView(iconKey: .stars, title: String(format: localized(.starsFormat), item.stars))
-            RowView(iconKey: .date, title: String(format: localized(.dateFormat), 123, "456"))
-            FooterView()
+            if item != nil {
+                HeaderView(title: item.description)
+                RowView(iconKey: .language, title: item.language)
+                RowView(iconKey: .forks, title: String(format: localized(.forksFormat), item.forks))
+                RowView(iconKey: .stars, title: String(format: localized(.starsFormat), item.stars))
+                RowView(iconKey: .date, title: String(format: localized(.dateFormat), 123, "456"))
+                FooterView()
+            }
         }
     }
 }

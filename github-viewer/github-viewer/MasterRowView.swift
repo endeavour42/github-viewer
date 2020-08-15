@@ -15,8 +15,12 @@ struct MasterRowView: View {
     var body: some View {
         VStack {
             HStack(spacing: 10) {
+                
                 WebImage(item.avatarUrl!)
                     .frame(width: 50, height: 50)
+                    .aspectRatio(contentMode: ContentMode.fill)
+                    .clipShape(Circle())
+
                 VStack(alignment: .leading, spacing: 4) {
                     Text(item.name)
                         .font(.headline)
@@ -25,6 +29,7 @@ struct MasterRowView: View {
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
+                
                 Spacer()
                 
                 Button(action: {

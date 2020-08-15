@@ -9,9 +9,13 @@
 import SwiftUI
 
 enum SystemIconKey: String {
-    case command
     case bookmark
     case chevron_right = "chevron.right"
+    
+    case language = "command"
+    case forks = "arrow.branch"
+    case stars = "star"
+    case date = "clock"
 }
 
 extension Image {

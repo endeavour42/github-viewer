@@ -14,7 +14,7 @@ struct MasterRowView: View {
     var body: some View {
         VStack {
             HStack(spacing: 10) {
-                Image(.command)
+                Image(.language)
                     .resizable()
                     .frame(width: 50, height: 50)
                 VStack(alignment: .leading, spacing: 4) {

@@ -8,18 +8,16 @@
 
 import SwiftUI
 
-struct DetailView: View {
+struct HeaderView: View {
     var body: some View {
-        List {
-            Text("some long text will be here this is a description that overlaps over a few lines")
-                .font(.title)
-                .padding()
-            
-            Text("first")
-            Text("second")
-            Text("third")
-            Text("fourth")
-            
+        Text("some long text will be here this is a description that overlaps over a few lines")
+            .font(.title)
+            .padding()
+    }
+}
+
+struct FooterView: View {
+    var body: some View {
             HStack() {
                 Spacer()
                 Button(action: {
@@ -33,6 +31,30 @@ struct DetailView: View {
                 Spacer()
             }
         .padding()
+    }
+}
+
+struct RowView: View {
+    var iconKey: SystemIconKey
+    var title: String
+    
+    var body: some View {
+        HStack {
+            Image(iconKey).resizable().frame(width: 18, height: 18)
+            Text(title)
+        }
+    }
+}
+
+struct DetailView: View {
+    var body: some View {
+        List {
+            HeaderView()
+            RowView(iconKey: .language, title: "language")
+            RowView(iconKey: .forks, title: "forks")
+            RowView(iconKey: .stars, title: "stars")
+            RowView(iconKey: .date, title: "date")
+            FooterView()
         }
     }
 }

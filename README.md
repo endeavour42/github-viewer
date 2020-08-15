@@ -10,6 +10,12 @@ Lists trending github repositories sorted by star count for day/month and year p
 ## What it does not:
 Anything else
 
+## iPhone:
+![iphoneScreenshot](https://github.com/mikekl/github-viewer/blob/master/screenshots/iphone.png)
+
+## mac:
+![macScreenshot](https://github.com/mikekl/github-viewer/blob/master/screenshots/iphone.png)
+
 ## Uses/Has:
 * UIKit
 * UICollectionView

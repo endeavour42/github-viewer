@@ -32,10 +32,4 @@ class MasterRowCell: UICollectionViewCell {
             }
         }
     }
-    
-    override var isSelected: Bool {
-        didSet {
-            backgroundColor = isSelected ? .red : .blue
-        }
-    }
 }

@@ -18,6 +18,7 @@ Anything else
 * URL on disk caching for search results and avatars
 * preliminary localization support
 * network activity indicator
+* iphone / ipad / mac catalyst support
 
 ## TODO:
 * fix caching, now it is too aggressive and doesn't revalidate resources

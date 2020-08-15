@@ -29,15 +29,14 @@ class MasterController: UIViewController {
         super.viewDidLoad()
         
         collectionLayout = UICollectionViewFlowLayout()
-        collectionLayout.itemSize = CGSize(width: 100, height: 100)
         
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: collectionLayout)
-        collectionView.backgroundColor = .red
         collectionView.register(MasterRowCell.self, forCellWithReuseIdentifier: MasterRowCell.identifier)
         collectionView.delegate = self
         collectionView.autoresizingMask = .flexibleSize
         collectionView.isScrollEnabled = true
         collectionView.alwaysBounceVertical = true
+        collectionView.backgroundColor = .systemBackground
         view.addSubview(collectionView)
         
         dataSource = DataSource(collectionView: collectionView, cellProvider: cellProvider)
@@ -85,7 +84,7 @@ extension MasterController {
 extension MasterController {
     private func cellProvider(_ collectionView: UICollectionView, _ indexPath: IndexPath, _ item: RepoItem) -> UICollectionViewCell? {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MasterRowCell.identifier, for: indexPath) as! MasterRowCell
-        cell.textLabel.text = item.name
+        cell.item = item
         return cell
     }
 }
@@ -98,6 +97,6 @@ extension MasterController: UICollectionViewDelegate {
 
 extension MasterController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: 100, height: 100)
+        CGSize(width: collectionView.bounds.width, height: 44)
     }
 }

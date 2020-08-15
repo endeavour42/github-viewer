@@ -14,13 +14,19 @@ class MasterRowCell: UICollectionViewCell {
         String(describing: Self.self)
     }
     
-    var textLabel: UILabel!
+    var item: RepoItem? {
+        didSet {
+            textLabel.text = item?.name
+        }
+    }
+    
+    private var textLabel: UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .blue
-        textLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        textLabel.text = "xxx"
+        backgroundColor = .cyan
+        textLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 44))
+        contentView.addSubview(textLabel)
     }
     
     required init?(coder: NSCoder) {

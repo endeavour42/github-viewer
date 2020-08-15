@@ -12,6 +12,9 @@ var temp: Int = 0 // TODO: remove later
 
 class MasterController: UIViewController {
     
+    typealias DataSource = UITableViewDiffableDataSource<String, RepoItem>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<String, RepoItem>
+    
     enum Segues: String {
         case showDetail
     }
@@ -19,6 +22,7 @@ class MasterController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var detailController: DetailController?
+    private var dataSource: DataSource!
 
     var model: RepoModel { RepoModel.singleton }
 
@@ -26,17 +30,29 @@ class MasterController: UIViewController {
         super.viewDidLoad()
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        tableView.dataSource = self
         tableView.delegate = self
-
+        
+        dataSource = DataSource(tableView: tableView, cellProvider: cellProvider)
+        dataSource.defaultRowAnimation = .fade
+        
         let controllers = splitViewController!.viewControllers
         detailController = (controllers.last as! UINavigationController).topViewController as? DetailController
         
         NotificationCenter.default.addObserver(forName: model.changedNotification, object: nil, queue: nil) { _ in
-            self.tableView.reloadData() // REDO
+            self.applyModelChanges()
         }
+        applyModelChanges()
     }
-
+    
+    private func applyModelChanges() {
+        self.tableView.reloadData() // REDO
+        
+        var snapshot = Snapshot()
+        snapshot.appendSections(["rows"])
+        snapshot.appendItems(model.items)
+        dataSource.apply(snapshot)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         //clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
@@ -61,16 +77,9 @@ extension MasterController {
 
 // MARK: TableView
 
-extension MasterController: UITableViewDataSource {
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.items.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+extension MasterController {
+    private func cellProvider(_ tableView: UITableView, _ indexPath: IndexPath, _ item: RepoItem) -> UITableViewCell? {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-
-        let item = model.items[indexPath.row]
         cell.textLabel!.text = item.name
         return cell
     }

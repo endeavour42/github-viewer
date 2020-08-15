@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct RepoItem {
+struct RepoItem: Hashable {
     var name: String
 }

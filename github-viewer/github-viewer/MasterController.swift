@@ -97,6 +97,6 @@ extension MasterController: UICollectionViewDelegate {
 
 extension MasterController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: collectionView.bounds.width, height: 44)
+        CGSize(width: collectionView.bounds.width, height: 90)
     }
 }

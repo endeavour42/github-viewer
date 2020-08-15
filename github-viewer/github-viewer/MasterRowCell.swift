@@ -11,16 +11,17 @@ import SwiftUI
 
 class MasterRowCell: UICollectionViewCell {
     
-    private var vc: UIViewController!
-    
     static var identifier: String {
         String(describing: Self.self)
     }
+    
+    private var vc: UIViewController!
     
     var item: RepoItem? {
         didSet {
             vc?.view?.removeFromSuperview()
             vc = nil
+            
             if let item = item {
                 vc = UIHostingController(rootView: MasterRowView(item: item))
                 let v = vc.view!

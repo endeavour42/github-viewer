@@ -7,23 +7,26 @@
 //
 
 import UIKit
+import SwiftUI
 
 class DetailController: UIViewController {
 
-    @IBOutlet weak var detailLabel: UILabel!
-
-    func configureView() {
-        detailLabel?.text = item?.title
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configureView()
-    }
-
+    private var vc: UIViewController!
+    
     var item: RepoItem? {
         didSet {
-            configureView()
+            vc?.removeFromParent()
+            vc?.view?.removeFromSuperview()
+            vc = nil
+            
+            if let item = item {
+                vc = UIHostingController(rootView: MasterRowView(item: item))
+                addChild(vc)
+                let v = vc.view!
+                v.frame = view.bounds
+                v.autoresizingMask = .flexibleSize
+                view.addSubview(v)
+            }
         }
     }
 }

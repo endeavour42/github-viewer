@@ -11,26 +11,23 @@ import SwiftUI
 
 class MasterRowCell: UICollectionViewCell {
     
+    private var vc: UIViewController!
+    
     static var identifier: String {
         String(describing: Self.self)
     }
     
     var item: RepoItem? {
         didSet {
-            textLabel.text = item?.title
+            vc?.view?.removeFromSuperview()
+            vc = nil
+            if let item = item {
+                vc = UIHostingController(rootView: MasterRowView(item: item))
+                let v = vc.view!
+                v.frame = contentView.bounds
+                v.autoresizingMask = .flexibleSize
+                contentView.addSubview(v)
+            }
         }
-    }
-    
-    private var textLabel: UILabel!
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .cyan
-        textLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 44))
-        contentView.addSubview(textLabel)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

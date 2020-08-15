@@ -13,6 +13,9 @@ enum StringKey: String {
     case starsFormat = "%d Stars"
     case dateFormat = "Created %d years ago at %@"
     case open = "Open in GitHub"
+    case day
+    case month
+    case year
 }
 
 func localized(_ key: StringKey) -> String {

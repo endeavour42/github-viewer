@@ -9,3 +9,6 @@
 "forksFormat" = "%d Forks";
 "starsFormat" = "%d Stars";
 "dateFormat" = "Created %d years ago at %@";
+"day" = "Day";
+"month" = "Month";
+"year" = "Year";

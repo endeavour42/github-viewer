@@ -11,3 +11,10 @@ import UIKit
 extension UIView.AutoresizingMask {
     static let flexibleSize: UIView.AutoresizingMask = [.flexibleWidth, .flexibleHeight]
 }
+
+extension String {
+    func contained(in strings: [String]) -> Bool {
+        guard !isEmpty else { return true }
+        return strings.contains { $0.localizedCaseInsensitiveContains(self) }
+    }
+}

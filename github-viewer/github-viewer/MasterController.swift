@@ -26,6 +26,7 @@ class MasterController: UIViewController {
     
     private var searchText: String? {
         didSet {
+            applyModelChanges()
         }
     }
 
@@ -53,9 +54,12 @@ class MasterController: UIViewController {
     }
     
     private func applyModelChanges() {
+        let items = model.items
+            .filter { searchText?.contained(in: [$0.name, $0.description]) ?? true }
+        
         var snapshot = Snapshot()
         snapshot.appendSections(["rows"])
-        snapshot.appendItems(model.items)
+        snapshot.appendItems(items)
         dataSource.apply(snapshot)
     }
     
@@ -112,7 +116,7 @@ extension MasterController {
         sc.hidesNavigationBarDuringPresentation = false
         let sb = sc.searchBar
         sb.delegate = self
-        sb.scopeButtonTitles = ["day", "month", "year"]
+        sb.scopeButtonTitles = [localized(.day), localized(.month), localized(.year)]
         sb.showsScopeBar = true
         
         navigationItem.searchController = sc

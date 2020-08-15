@@ -23,5 +23,5 @@ enum StringKey: String {
 }
 
 func localized(_ key: StringKey) -> String {
-    NSLocalizedString(key.rawValue, comment: "").uppercased()
+    NSLocalizedString(key.rawValue, comment: "")
 }

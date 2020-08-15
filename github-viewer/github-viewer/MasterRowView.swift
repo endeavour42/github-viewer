@@ -22,7 +22,7 @@ struct MasterRowView: View {
                     .clipShape(Circle())
 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(item.login + "/" + item.name)
+                    Text(item.title)
                         .font(.headline)
                         .foregroundColor(.primary)
                     Text(item.description ?? localized(.noDescription))

@@ -28,12 +28,16 @@ struct RepoItem: Identifiable, Hashable, Decodable {
     
     private static let dateFormatter = DateFormatter(dateFormat: "yyyy-MM-dd'T'HH:mm:ssZ")
 
+    var title: String {
+        login + "/" + name
+    }
+    
     var login: String {
         owner.login
     }
     
     var createdDate: Date {
-        return RepoItem.dateFormatter.date(from: created_at)!
+        RepoItem.dateFormatter.date(from: created_at)!
     }
     
     var avatarUrl: URL? {
@@ -42,7 +46,7 @@ struct RepoItem: Identifiable, Hashable, Decodable {
     }
     
     var htmlUrl: URL? {
-        return URL(string: html_url)
+        URL(string: html_url)
     }
 }
 

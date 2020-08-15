@@ -50,12 +50,15 @@ class MasterController: UIViewController {
     
     private func applyModelChanges() {
         let items = model.items
-            .filter { searchText?.isContained(in: [$0.name, $0.description]) ?? true }
+            .filter { searchText?.isContained(in: [$0.title, $0.description]) ?? true }
         
         var snapshot = Snapshot()
         snapshot.appendSections(["rows"])
         snapshot.appendItems(items)
-        dataSource.apply(snapshot)
+        
+        onMainThread { // REDO later
+            self.dataSource.apply(snapshot)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -30,11 +30,14 @@ class MasterController: UIViewController {
         
         collectionLayout = UICollectionViewFlowLayout()
         collectionLayout.itemSize = CGSize(width: 100, height: 100)
+        
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: collectionLayout)
         collectionView.backgroundColor = .red
         collectionView.register(MasterRowCell.self, forCellWithReuseIdentifier: MasterRowCell.identifier)
         collectionView.delegate = self
         collectionView.autoresizingMask = .flexibleSize
+        collectionView.isScrollEnabled = true
+        collectionView.alwaysBounceVertical = true
         view.addSubview(collectionView)
         
         dataSource = DataSource(collectionView: collectionView, cellProvider: cellProvider)

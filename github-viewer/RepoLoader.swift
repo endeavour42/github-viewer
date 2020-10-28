@@ -21,13 +21,14 @@ extension URLSession {
             components.host = "api.github.com"
             components.path = "/search/repositories"
             
-            components.queryItems = [
-                URLQueryItem(name: "q", value: "created:>" + dateString),
-                URLQueryItem(name: "sort", value: "stars"),
-                URLQueryItem(name: "order", value: "desc"),
-                URLQueryItem(name: "accept", value: "application/vnd.github.v3+json"),
-                URLQueryItem(name: "per_page", value: String(itemCountPerPage))
+            let queryItems = [
+                "q" : "created:>" + dateString,
+                "sort" : "stars",
+                "order" : "desc",
+                "accept" : "application/vnd.github.v3+json",
+                "per_page" : String(itemCountPerPage)
             ]
+            components.queryItems = queryItems.map { URLQueryItem(name: $0, value: $1) }
             return components.url
         }
         

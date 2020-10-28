@@ -17,11 +17,11 @@ Anything else
 ![macScreenshot](https://github.com/mikekl/github-viewer/blob/master/screenshots/mac.png)
 
 ## Uses/Has:
-* UIKit
-* UICollectionView
-* diffable data sources
+* UIKit, with SwiftUI piecewise
+* has all commits from empty project to show the whole journey, not just the end result
+* UICollectionView with diffable data sources
+* SwiftUI views
 * pull to refresh and infinite scrolling
-* SwiftUI piecewise
 * URL on disk caching for search results and avatars
 * preliminary localization support
 * network activity indicator
